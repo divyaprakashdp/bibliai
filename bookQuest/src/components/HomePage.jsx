@@ -7,6 +7,7 @@ import Psy_of_Money from "../assets/temp_img/psy_of_money.jpg";
 import { Box } from "@mui/material";
 import SearchBar from "./SearchBar";
 import { Typography } from "@mui/material";
+import BookOverview from "./BookOverview";
 
 export default function HomePage() {
   let bookInfo = [
@@ -27,8 +28,15 @@ export default function HomePage() {
       textAlign="center"
       mx={"auto"}
       width={"80%"}
+      marginTop="20px"
     >
-      <Typography variant="h2">Welcome</Typography>
+      <Typography variant="h2" fontFamily={"Inconsolata"}>
+        Welcome
+      </Typography>
+      <Typography fontFamily={"Inconsolata"}>
+        Unlock the World of Imagination: Search, Discover, and Buy Books with
+        Ease.
+      </Typography>
       <SearchBar />
       <Stack
         direction="row"
