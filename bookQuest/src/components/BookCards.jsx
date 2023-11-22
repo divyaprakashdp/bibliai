@@ -5,23 +5,21 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 
 export default function BookCards(props) {
-  let booksCard = props.bookData.map((a) => (
-    <Card sx={{ maxWidth: 345, width: 240, height: 360 }} key={a.bookName}>
-      <CardActionArea href={`overview/1`}>
-        <Link to={`overview/1`}></Link>
+  let booksCard = props.bookData.map((book) => (
+    <Card sx={{ maxWidth: 345, width: 240, height: 360 }} key={book.bookName}>
+      <CardActionArea href={`overview/${book.bookName}`}>
         <CardMedia
           component="img"
           width={"140px"}
           height="280"
-          src={a.bookImage}
-          alt="Atomic Habits"
+          src={book.bookImage}
+          alt={book.bookName}
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="div">
-            {a.bookName}
+            {book.bookName}
           </Typography>
         </CardContent>
       </CardActionArea>

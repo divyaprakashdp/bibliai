@@ -13,10 +13,14 @@ export default function OverviewTab(props) {
   };
 
   return (
-    <Box sx={{ width: "100%", typography: "body1" }}>
+    <Box sx={{ typography: "body1" }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <TabList
+            onChange={handleChange}
+            textColor="inherit"
+            indicatorColor="primary"
+          >
             <Tab label="Summary" value="1" />
             <Tab label="Preview" value="2" />
             <Tab label="Review" value="3" />

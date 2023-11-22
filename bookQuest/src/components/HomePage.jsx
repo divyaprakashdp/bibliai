@@ -1,25 +1,27 @@
 import Stack from "@mui/material/Stack";
 import BookCards from "./BookCards";
-import Atomic_Habits from "../assets/temp_img/Atomic_Habits.jpg";
-import David_Copperfield from "../assets/temp_img/David_Copperfield.jpg";
-import Thinking_Fast_And_Slow from "../assets/temp_img/thinking_fast_and_slow.jpg";
-import Psy_of_Money from "../assets/temp_img/psy_of_money.jpg";
+// import Atomic_Habits from "../assets/temp_img/Atomic_Habits.jpg";
+// import David_Copperfield from "../assets/temp_img/David_Copperfield.jpg";
+// import Thinking_Fast_And_Slow from "../assets/temp_img/thinking_fast_and_slow.jpg";
+// import Psy_of_Money from "../assets/temp_img/psy_of_money.jpg";
 import { Box } from "@mui/material";
 import SearchBar from "./SearchBar";
 import { Typography } from "@mui/material";
-import BookOverview from "./BookOverview";
+import data from "../assets/bookInfo.json";
 
 export default function HomePage() {
-  let bookInfo = [
-    { bookName: "Atomic Habits", bookImage: Atomic_Habits },
-    { bookName: "David Copperfield", bookImage: David_Copperfield },
-    { bookName: "Thinking Fast And Slow", bookImage: Thinking_Fast_And_Slow },
-    { bookName: "Psychology of Money", bookImage: Psy_of_Money },
-    { bookName: "David Copperfield", bookImage: David_Copperfield },
-    { bookName: "David Copperfield", bookImage: David_Copperfield },
-    { bookName: "David Copperfield", bookImage: David_Copperfield },
-    { bookName: "David Copperfield", bookImage: David_Copperfield },
-  ];
+  // let bookInfo = [
+  //   { bookName: "Atomic Habits", bookImage: Atomic_Habits },
+  //   { bookName: "David Copperfield", bookImage: David_Copperfield },
+  //   { bookName: "Thinking Fast And Slow", bookImage: Thinking_Fast_And_Slow },
+  //   { bookName: "Psychology of Money", bookImage: Psy_of_Money },
+  //   { bookName: "David Copperfield", bookImage: David_Copperfield },
+  //   { bookName: "David Copperfield", bookImage: David_Copperfield },
+  //   { bookName: "David Copperfield", bookImage: David_Copperfield },
+  //   { bookName: "David Copperfield", bookImage: David_Copperfield },
+  // ];
+
+  console.log(data);
   return (
     <Box
       minHeight="100vh"
@@ -46,7 +48,7 @@ export default function HomePage() {
         alignItems="center"
         justifyContent="center"
       >
-        <BookCards bookData={bookInfo} />
+        <BookCards bookData={data} />
       </Stack>
     </Box>
   );

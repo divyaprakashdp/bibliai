@@ -1,6 +1,18 @@
-import { Box, Grid, Paper, Typography, styled } from "@mui/material";
-import BookCards from "./BookCards";
+import {
+  Box,
+  Grid,
+  Paper,
+  Typography,
+  styled,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+} from "@mui/material";
 import OverviewTab from "./OverviewTab";
+import { useParams } from "react-router-dom";
+
+import data from "../assets/bookInfo.json";
 
 const bookSummary = `"Atomic Habits" by James Clear is a transformative guide that unveils the incredible power of small habits for massive personal growth. Clear explores the science behind habit formation and illustrates how tiny changes can lead to remarkable results. Through engaging anecdotes and practical strategies, he empowers readers to harness the compound effect of daily habits. The book inspires a mindset shift, encouraging individuals to focus on systems rather than goals, fostering a sustainable path to success. Clear's insights redefine motivation and offer a roadmap for continuous improvement. Whether aspiring for professional success or personal well-being, "Atomic Habits" is a compelling catalyst for positive change.`;
 
@@ -41,11 +53,12 @@ particular workout. The team tested various fabrics in a wind tunnel
 and had their outdoor riders switch to indoor racing suits, which
 proved to be lighter and more aerodynamic.`;
 
-const bookReview = `No Review Available as of now.`;
+const bookReview = `It seems there is no review available for this book as of now. Maybe you will be able to add a review once you read the book.`;
 
 const PaperPane = styled(Paper)({
   padding: 30,
   height: 480,
+  width: "100%",
   textAlign: "left",
   overflowY: "auto",
 });
@@ -59,17 +72,34 @@ const bookPreviewCard = (
 const bookReviewCard = <PaperPane>{bookReview}</PaperPane>;
 
 export default function BookOverview() {
+  const { book_Name } = useParams();
+  const [bookDetails] = data.filter((book) => book.bookName === book_Name);
+
   return (
     <Box mx={"auto"} width={"90%"} marginTop="20px">
       <Grid container direction="row" spacing={5}>
-        <Grid item xs={4} mt={10}>
-          <BookCards
-            bookData={[
-              { bookName: "Atomic Habits", bookImage: "Atomic_Habits" },
-            ]}
-          />
+        <Grid item xs={12} sm={4} mt={10}>
+          <Card
+            sx={{ width: "90%", height: 530, alignItems: "center" }}
+            key={bookDetails.bookName}
+          >
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                width={"140px"}
+                height="280"
+                src={bookDetails.bookImage}
+                alt={bookDetails.bookName}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h6" component="div">
+                  {bookDetails.bookName}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} sm={8}>
           <OverviewTab
             displayData={{
               summary: bookSummaryCard,
