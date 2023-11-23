@@ -10,17 +10,6 @@ import { Typography } from "@mui/material";
 import data from "../assets/bookInfo.json";
 
 export default function HomePage() {
-  // let bookInfo = [
-  //   { bookName: "Atomic Habits", bookImage: Atomic_Habits },
-  //   { bookName: "David Copperfield", bookImage: David_Copperfield },
-  //   { bookName: "Thinking Fast And Slow", bookImage: Thinking_Fast_And_Slow },
-  //   { bookName: "Psychology of Money", bookImage: Psy_of_Money },
-  //   { bookName: "David Copperfield", bookImage: David_Copperfield },
-  //   { bookName: "David Copperfield", bookImage: David_Copperfield },
-  //   { bookName: "David Copperfield", bookImage: David_Copperfield },
-  //   { bookName: "David Copperfield", bookImage: David_Copperfield },
-  // ];
-
   console.log(data);
   return (
     <Box
