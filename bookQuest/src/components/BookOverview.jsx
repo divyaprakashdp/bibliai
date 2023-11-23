@@ -11,11 +11,11 @@ import {
   Button,
 } from "@mui/material";
 import OverviewTab from "./OverviewTab";
-import { useParams } from "react-router-dom";
-
-import data from "../assets/bookInfo.json";
+// import { useParams } from "react-router-dom";
 import { useState } from "react";
 import BuyOptions from "./BuyOptions";
+
+import { useEffect } from "react";
 
 const bookSummary = `"Atomic Habits" by James Clear is a transformative guide that unveils the incredible power of small habits for massive personal growth. Clear explores the science behind habit formation and illustrates how tiny changes can lead to remarkable results. Through engaging anecdotes and practical strategies, he empowers readers to harness the compound effect of daily habits. The book inspires a mindset shift, encouraging individuals to focus on systems rather than goals, fostering a sustainable path to success. Clear's insights redefine motivation and offer a roadmap for continuous improvement. Whether aspiring for professional success or personal well-being, "Atomic Habits" is a compelling catalyst for positive change.`;
 
@@ -77,9 +77,23 @@ const bookReviewCard = <PaperPane>{bookReview}</PaperPane>;
 export default function BookOverview() {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
+  let [bookData, setBookData] = useState();
 
-  const { book_Name } = useParams();
-  const [bookDetails] = data.filter((book) => book.bookName === book_Name);
+  // const { book_Name } = useParams();
+
+  useEffect(() => {
+    console.log("side effect");
+    fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=atomichabit&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(`data=> ${data.items}`);
+        setBookData(data.items);
+      });
+  }, [bookData]);
+
+  const [bookDetails] = bookData[0];
 
   const handleBuyOptions = () => {
     setOpen(true);
@@ -94,53 +108,53 @@ export default function BookOverview() {
     <Box mx={"auto"} width={"90%"} marginTop="20px">
       <Grid container direction="row" spacing={5}>
         <Grid item xs={12} sm={4} mt={10}>
-          <Card
-            sx={{
-              width: "90%",
-              height: 530,
-              textAlign: "center",
-            }}
-            key={bookDetails.bookName}
-          >
-            <CardMedia
-              component="img"
-              width={"140px"}
-              height="400"
-              src={bookDetails.bookImage}
-              alt={bookDetails.bookName}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h6" component="div">
-                {bookDetails.bookName}
-              </Typography>
-            </CardContent>
-            <CardActions sx={{ justifyContent: "center" }}>
-              <Button
-                size="small"
-                variant="contained"
-                onClick={handleBuyOptions}
-              >
-                Buy
-              </Button>
-              <Button size="small" variant="contained">
-                Learn More
-              </Button>
-              <BuyOptions
-                selectedValue={selectedValue}
-                open={open}
-                onClose={handleClose}
-                bookName={bookDetails.bookName}
+          {bookData && (
+            <Card
+              sx={{
+                width: "90%",
+                height: 530,
+                textAlign: "center",
+              }}
+              key={bookDetails.id}
+            >
+              <CardMedia
+                component="img"
+                width={"140px"}
+                height="400"
+                src={bookDetails.imageLinks.thumbnail}
+                alt={bookDetails.volumeInfo.title}
               />
-            </CardActions>
-          </Card>
+              <CardContent>
+                <Typography gutterBottom variant="h6" component="div">
+                  {bookDetails.volumeInfo.title}
+                </Typography>
+              </CardContent>
+              <CardActions sx={{ justifyContent: "center" }}>
+                <Button
+                  size="small"
+                  variant="contained"
+                  onClick={handleBuyOptions}
+                >
+                  Buy
+                </Button>
+                <Button size="small" variant="contained">
+                  Learn More
+                </Button>
+                <BuyOptions
+                  selectedValue={selectedValue}
+                  open={open}
+                  onClose={handleClose}
+                  bookName={bookDetails.volumeInfo.title}
+                />
+              </CardActions>
+            </Card>
+          )}
         </Grid>
         <Grid item xs={12} sm={8}>
           <OverviewTab
-            displayData={{
-              summary: bookSummaryCard,
-              preview: bookPreviewCard,
-              review: bookReviewCard,
-            }}
+            summary={bookSummaryCard}
+            preview={bookPreviewCard}
+            review={bookReviewCard}
           />
         </Grid>
       </Grid>

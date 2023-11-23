@@ -4,8 +4,10 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import PropTypes from "prop-types";
 
 export default function OverviewTab(props) {
+  const { summary, preview, review } = props;
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
@@ -26,10 +28,16 @@ export default function OverviewTab(props) {
             <Tab label="Review" value="3" />
           </TabList>
         </Box>
-        <TabPanel value="1">{props.displayData.summary}</TabPanel>
-        <TabPanel value="2">{props.displayData.preview}</TabPanel>
-        <TabPanel value="3">{props.displayData.review}</TabPanel>
+        <TabPanel value="1">{summary}</TabPanel>
+        <TabPanel value="2">{preview}</TabPanel>
+        <TabPanel value="3">{review}</TabPanel>
       </TabContext>
     </Box>
   );
 }
+
+OverviewTab.propTypes = {
+  summary: PropTypes.string.isRequired,
+  preview: PropTypes.string.isRequired,
+  review: PropTypes.string.isRequired,
+};

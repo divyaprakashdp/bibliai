@@ -43,4 +43,5 @@ BuyOptions.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   selectedValue: PropTypes.string.isRequired,
+  bookName: PropTypes.string.isRequired,
 };

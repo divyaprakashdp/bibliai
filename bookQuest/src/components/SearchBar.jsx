@@ -1,4 +1,5 @@
-// import SearchIcon from "@mui/icons-material";
+import IconButton from "@mui/material/IconButton";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 
@@ -38,7 +39,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "30ch",
     },
   },
 }));
@@ -48,10 +49,12 @@ export default function SearchBar() {
     <>
       <Search>
         <SearchIconWrapper>
-          <button />
+          <IconButton color="primary" aria-label="add to shopping cart">
+            <SearchOutlinedIcon />
+          </IconButton>
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Search a book/author..."
+          placeholder="Search a book/author/topic..."
           inputProps={{ "aria-label": "search" }}
         />
       </Search>

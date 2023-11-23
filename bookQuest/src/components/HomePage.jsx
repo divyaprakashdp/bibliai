@@ -1,16 +1,25 @@
 import Stack from "@mui/material/Stack";
 import BookCards from "./BookCards";
-// import Atomic_Habits from "../assets/temp_img/Atomic_Habits.jpg";
-// import David_Copperfield from "../assets/temp_img/David_Copperfield.jpg";
-// import Thinking_Fast_And_Slow from "../assets/temp_img/thinking_fast_and_slow.jpg";
-// import Psy_of_Money from "../assets/temp_img/psy_of_money.jpg";
 import { Box } from "@mui/material";
 import SearchBar from "./SearchBar";
 import { Typography } from "@mui/material";
-import data from "../assets/bookInfo.json";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function HomePage() {
-  console.log(data);
+  let [bookData, setBookData] = useState();
+
+  useEffect(() => {
+    console.log("side effect");
+    fetch(
+      "https://www.googleapis.com/books/v1/volumes?q=self-help&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(`data=> ${data}`);
+        setBookData(data.items);
+      });
+  }, []);
   return (
     <Box
       minHeight="100vh"
@@ -37,7 +46,7 @@ export default function HomePage() {
         alignItems="center"
         justifyContent="center"
       >
-        <BookCards bookData={data} />
+        {bookData && <BookCards bookData={bookData} />}
       </Stack>
     </Box>
   );
