@@ -5,9 +5,18 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import PropTypes from "prop-types";
+import { Paper, styled, Typography } from "@mui/material";
+
+const PaperPane = styled(Paper)({
+  padding: 30,
+  height: 480,
+  width: "100%",
+  textAlign: "left",
+  overflowY: "auto",
+});
 
 export default function OverviewTab(props) {
-  const { summary, preview, review } = props;
+  const { description, summary, review } = props;
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
@@ -23,14 +32,26 @@ export default function OverviewTab(props) {
             textColor="inherit"
             indicatorColor="primary"
           >
-            <Tab label="Summary" value="1" />
-            <Tab label="Preview" value="2" />
+            <Tab label="Description" value="1" />
+            <Tab label="Summary" value="2" />
             <Tab label="Review" value="3" />
           </TabList>
         </Box>
-        <TabPanel value="1">{summary}</TabPanel>
-        <TabPanel value="2">{preview}</TabPanel>
-        <TabPanel value="3">{review}</TabPanel>
+        <TabPanel value="1">
+          <PaperPane>
+            <Typography>{description}</Typography>
+          </PaperPane>
+        </TabPanel>
+        <TabPanel value="2">
+          <PaperPane>
+            <Typography>{summary}</Typography>
+          </PaperPane>
+        </TabPanel>
+        <TabPanel value="3">
+          <PaperPane>
+            <Typography>{review}</Typography>
+          </PaperPane>
+        </TabPanel>
       </TabContext>
     </Box>
   );
@@ -38,6 +59,6 @@ export default function OverviewTab(props) {
 
 OverviewTab.propTypes = {
   summary: PropTypes.string.isRequired,
-  preview: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
 };

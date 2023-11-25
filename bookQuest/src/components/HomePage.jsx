@@ -10,9 +10,8 @@ export default function HomePage() {
   let [bookData, setBookData] = useState();
 
   useEffect(() => {
-    console.log("side effect");
     fetch(
-      "https://www.googleapis.com/books/v1/volumes?q=self-help&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ"
+      "https://www.googleapis.com/books/v1/volumes?q=self-help&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ&maxResults=20"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -29,11 +28,12 @@ export default function HomePage() {
       mx={"auto"}
       width={"80%"}
       marginTop="20px"
+      color={"#800000"}
     >
       <Typography variant="h2" fontFamily={"Inconsolata"}>
         Welcome
       </Typography>
-      <Typography fontFamily={"Inconsolata"}>
+      <Typography variant="h5" fontFamily={"Inconsolata"}>
         Unlock the World of Imagination: Search, Discover, and Buy Books with
         Ease.
       </Typography>

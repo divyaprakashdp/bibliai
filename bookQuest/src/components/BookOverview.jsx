@@ -1,9 +1,7 @@
 import {
   Box,
   Grid,
-  Paper,
   Typography,
-  styled,
   Card,
   CardActions,
   CardContent,
@@ -11,13 +9,11 @@ import {
   Button,
 } from "@mui/material";
 import OverviewTab from "./OverviewTab";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import BuyOptions from "./BuyOptions";
 
 import { useEffect } from "react";
-
-const bookSummary = `"Atomic Habits" by James Clear is a transformative guide that unveils the incredible power of small habits for massive personal growth. Clear explores the science behind habit formation and illustrates how tiny changes can lead to remarkable results. Through engaging anecdotes and practical strategies, he empowers readers to harness the compound effect of daily habits. The book inspires a mindset shift, encouraging individuals to focus on systems rather than goals, fostering a sustainable path to success. Clear's insights redefine motivation and offer a roadmap for continuous improvement. Whether aspiring for professional success or personal well-being, "Atomic Habits" is a compelling catalyst for positive change.`;
 
 const bookPreview = `T
 
@@ -58,42 +54,22 @@ proved to be lighter and more aerodynamic.`;
 
 const bookReview = `It seems there is no review available for this book as of now. Maybe you will be able to add a review once you read the book.`;
 
-const PaperPane = styled(Paper)({
-  padding: 30,
-  height: 480,
-  width: "100%",
-  textAlign: "left",
-  overflowY: "auto",
-});
-
-const bookSummaryCard = <PaperPane>{bookSummary}</PaperPane>;
-const bookPreviewCard = (
-  <PaperPane>
-    <Typography>{bookPreview}</Typography>
-  </PaperPane>
-);
-const bookReviewCard = <PaperPane>{bookReview}</PaperPane>;
-
 export default function BookOverview() {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
-  let [bookData, setBookData] = useState();
+  const [bookData, setBookData] = useState();
 
-  // const { book_Name } = useParams();
+  const { book_Name } = useParams();
 
   useEffect(() => {
-    console.log("side effect");
     fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=atomichabit&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ`
+      `https://www.googleapis.com/books/v1/volumes?q=${book_Name}&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ`
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(`data=> ${data.items}`);
-        setBookData(data.items);
+        setBookData(data.items[0]);
       });
-  }, [bookData]);
-
-  const [bookDetails] = bookData[0];
+  }, [book_Name]);
 
   const handleBuyOptions = () => {
     setOpen(true);
@@ -106,27 +82,25 @@ export default function BookOverview() {
 
   return (
     <Box mx={"auto"} width={"90%"} marginTop="20px">
-      <Grid container direction="row" spacing={5}>
-        <Grid item xs={12} sm={4} mt={10}>
-          {bookData && (
+      {bookData && (
+        <Grid container direction="row" spacing={5}>
+          <Grid item xs={12} sm={4} mt={10}>
             <Card
               sx={{
-                width: "90%",
-                height: 530,
                 textAlign: "center",
               }}
-              key={bookDetails.id}
+              key={bookData.id}
             >
               <CardMedia
                 component="img"
-                width={"140px"}
                 height="400"
-                src={bookDetails.imageLinks.thumbnail}
-                alt={bookDetails.volumeInfo.title}
+                sx={{ maxWidth: "100%", objectFit: "contain" }}
+                src={bookData.volumeInfo.imageLinks.thumbnail}
+                alt={bookData.volumeInfo.title}
               />
               <CardContent>
                 <Typography gutterBottom variant="h6" component="div">
-                  {bookDetails.volumeInfo.title}
+                  {bookData.volumeInfo.title}
                 </Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: "center" }}>
@@ -138,26 +112,26 @@ export default function BookOverview() {
                   Buy
                 </Button>
                 <Button size="small" variant="contained">
-                  Learn More
+                  Preview
                 </Button>
                 <BuyOptions
                   selectedValue={selectedValue}
                   open={open}
                   onClose={handleClose}
-                  bookName={bookDetails.volumeInfo.title}
+                  bookName={bookData.volumeInfo.title}
                 />
               </CardActions>
             </Card>
-          )}
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <OverviewTab
+              description={bookData.volumeInfo.description}
+              summary={bookPreview}
+              review={bookReview}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={8}>
-          <OverviewTab
-            summary={bookSummaryCard}
-            preview={bookPreviewCard}
-            review={bookReviewCard}
-          />
-        </Grid>
-      </Grid>
+      )}
     </Box>
   );
 }
