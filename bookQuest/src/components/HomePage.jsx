@@ -9,6 +9,17 @@ import { useEffect } from "react";
 export default function HomePage() {
   let [bookData, setBookData] = useState();
 
+  const onSearch = (searchTerm) => {
+    fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ&maxResults=20`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(`data=> ${data}`);
+        setBookData(data.items);
+      });
+  };
+
   useEffect(() => {
     fetch(
       "https://www.googleapis.com/books/v1/volumes?q=self-help&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ&maxResults=20"
@@ -37,7 +48,7 @@ export default function HomePage() {
         Unlock the World of Imagination: Search, Discover, and Buy Books with
         Ease.
       </Typography>
-      <SearchBar />
+      <SearchBar onSearch={onSearch} />
       <Stack
         direction="row"
         spacing={5}

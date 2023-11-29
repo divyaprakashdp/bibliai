@@ -18,7 +18,7 @@ export default function BookCards(props) {
       }}
       key={book.id}
     >
-      <CardActionArea href={`overview/${book.volumeInfo.title}`}>
+      <CardActionArea href={`/${book.volumeInfo.title}`}>
         <CardMedia
           component="img"
           width={"140px"}

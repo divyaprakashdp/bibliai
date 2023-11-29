@@ -2,13 +2,15 @@ import IconButton from "@mui/material/IconButton";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+import { useState } from "react";
+import PropTypes from "prop-types";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "50px",
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.white, 0.4),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.6),
   },
   marginRight: 0,
   marginLeft: 0,
@@ -44,7 +46,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearch = (e) => {
+    if (e.keyCode === 13) {
+      // Make an API call with the search input
+      console.log(searchInput);
+      onSearch(searchInput);
+    }
+  };
+
   return (
     <>
       <Search>
@@ -56,8 +68,15 @@ export default function SearchBar() {
         <StyledInputBase
           placeholder="Search a book/author/topic..."
           inputProps={{ "aria-label": "search" }}
+          value={searchInput}
+          onChange={(event) => setSearchInput(event.target.value)}
+          onKeyDown={handleSearch}
         />
       </Search>
     </>
   );
 }
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+};
