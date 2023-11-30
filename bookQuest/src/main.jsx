@@ -5,8 +5,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./components/HomePage.jsx";
 // import ErrorPage from "./components/ErrorPage.jsx";
 import BookOverview from "./components/BookOverview.jsx";
-import NavBar from "./components/NavBar.jsx";
 import Layout from "./components/Layout.jsx";
+import Recommendation from "./components/Recommendation.jsx";
 
 // const router = createBrowserRouter([
 //   {
@@ -27,6 +27,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/:book_Name" element={<BookOverview />} />
+        <Route path="/recommendation" element={<Recommendation />} />
       </Route>
     </Routes>
   </BrowserRouter>

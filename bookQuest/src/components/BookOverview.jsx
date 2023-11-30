@@ -81,13 +81,14 @@ export default function BookOverview() {
   };
 
   return (
-    <Box mx={"auto"} width={"90%"} height={"100vh"} marginTop="20px">
+    <Box mx={"auto"} width={"auto"} height={"100vh"} marginTop="20px">
       {bookData ? (
-        <Grid container direction="row" spacing={5}>
+        <Grid container direction="row" spacing={5} sx={{ width: "90%" }}>
           <Grid item xs={12} sm={4} mt={10}>
             <Card
               sx={{
                 textAlign: "center",
+                backgroundColor: "#BC8F8F",
               }}
               key={bookData.id}
             >

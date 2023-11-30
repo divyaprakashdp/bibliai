@@ -13,6 +13,8 @@ const PaperPane = styled(Paper)({
   width: "100%",
   textAlign: "left",
   overflowY: "auto",
+  background: "#a7aaad",
+  color: "1d2327",
 });
 
 export default function OverviewTab(props) {
@@ -24,7 +26,7 @@ export default function OverviewTab(props) {
   };
 
   return (
-    <Box sx={{ typography: "body1" }}>
+    <Box sx={{ typography: "body1", width: "90%", color: "#800000" }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList
