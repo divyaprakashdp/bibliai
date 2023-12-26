@@ -8,9 +8,9 @@ import PropTypes from "prop-types";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "50px",
-  backgroundColor: alpha(theme.palette.common.white, 0.4),
+  backgroundColor: alpha("#333D2E", 0.2),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.6),
+    backgroundColor: alpha("#333D2E", 0.5),
   },
   marginRight: 0,
   marginLeft: 0,

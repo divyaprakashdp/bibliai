@@ -1,0 +1,187 @@
+{
+    "Nonfiction": [
+        {
+            "science": [
+                "Biology",
+                "Physics",
+                "Chemistry",
+                "Astronomy",
+                "Geoscience",
+                "Popular Science"
+            ]
+        },
+        {
+            "history": [
+                "world history",
+                "Indian History",
+                "French Revolution",
+                "Chengiz Khan",
+                "Ancient History (up to 500)",
+                "Modern History (1800-1945)",
+                "Military History",
+                "American History"
+            ]
+        },
+        {
+            "Maths": [
+                "Statistics",
+                "Probability",
+                "Calculus",
+                "Trigonometry",
+                "Algebra",
+                "Euclidian Geometry"
+            ]
+        },
+        {
+            "Art": [
+                "Architecture",
+                "Art History",
+                "Design & Illustration",
+                "Photograpy",
+                "Modern & contemporary Art",
+                "Fashion & Style"
+            ]
+        },
+        {
+            "Economics": [
+                "Behavioral Economics",
+                "Development Economics",
+                "Economic History",
+                "Finance",
+                "Financial Crisis",
+                "Globalization",
+                "world Economies",
+                "Indian Economics",
+                "US Economics"
+            ]
+        },
+        {
+            "Psychology": [
+                "Mental Health",
+                "Neuroscience",
+                "Psychoanalysis",
+                "Psychology Research",
+                "Self Help"
+            ]
+        },
+        {
+            "Environmental Science": [
+                "Climate Change",
+                "Ecology",
+                "Conservation",
+                "Environmental Policy",
+                "Natural Disasters",
+                "Sustainability",
+                "Wildlife Conservation"
+            ]
+        },
+        {
+            "Business": [
+                "Entrepreneurship",
+                "Management",
+                "Leadership",
+                "Business Strategy",
+                "Startups",
+                "Corporate Culture",
+                "Business Ethics"
+            ]
+        }
+    ],
+    "Fiction": [
+        {
+            "Hindi": [
+                "Comedy",
+                "Premchand"
+            ]
+        },
+        {
+            "Romance": [
+                "Chick-Lit",
+                "Romantic Comedy",
+                "Christian",
+                "Contemporary",
+                "romantica",
+                "Historical",
+                "Paranormal"
+            ]
+        },
+        {
+            "HORROR": [
+                "Comic Horror",
+                "Dark Fantasy",
+                "Noir",
+                "Vampire",
+                "Fabulist",
+                "Gothic",
+                "Hauntings",
+                "Historical",
+                "Psychological",
+                "Zombie"
+            ]
+        },
+        {
+            "THRILLER": [
+                "Action",
+                "Comic",
+                "Conspiracy",
+                "Crime",
+                "Disaster"
+            ]
+        },
+        {
+            "Mystery": [
+                "Cozy Mystery",
+                "Hardboiled",
+                "Police Procedural",
+                "Legal Thriller",
+                "Psychological Thriller",
+                "Espionage",
+                "Supernatural Mystery"
+            ]
+        },
+        {
+            "Science Fiction": [
+                "Cyberpunk",
+                "Space Opera",
+                "Military Science Fiction",
+                "Hard Science Fiction",
+                "Dystopian",
+                "Time Travel",
+                "Steampunk"
+            ]
+        },
+        {
+            "Historical Fiction": [
+                "Historical Mystery",
+                "Historical Romance",
+                "Alternate History",
+                "Biographical Fiction",
+                "Regency",
+                "World War II Historical Fiction",
+                "Victorian Era"
+            ]
+        },
+        {
+            "Adventure": [
+                "Action-Adventure",
+                "Survival",
+                "Treasure Hunt",
+                "Sea Adventure",
+                "Historical Adventure",
+                "Swashbuckler",
+                "Jungle Adventure"
+            ]
+        },
+        {
+            "Children's Literature": [
+                "Picture Books",
+                "Middle-Grade Fiction",
+                "Young Adult Fiction",
+                "Coming-of-Age",
+                "Fantasy Adventure",
+                "Mystery",
+                "Historical Fiction"
+            ]
+        }
+    ]
+}

@@ -4,11 +4,12 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 
 const Wrapper = styled(Box)(({ theme }) => ({
-  width: "100%",
-  height: "100vh",
-  backgroundImage: `url(
-    "https://source.unsplash.com/white-and-gray-floral-textile-XFWiZTa2Ub0"
-  )`,
+  maxWidth: "100%",
+  paddingBottom: "10px",
+  //   backgroundImage: `url(
+  //     "https://source.unsplash.com/white-and-gray-floral-textile-XFWiZTa2Ub0"
+  //   )`,
+  background: "#F4F2E9",
   backgroundSize: "cover",
   objectFit: "contain",
   [theme.breakpoints.down("md")]: {

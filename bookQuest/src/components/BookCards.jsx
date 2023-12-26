@@ -14,7 +14,7 @@ export default function BookCards(props) {
         maxWidth: "100%",
         width: 220,
         height: 360,
-        backgroundColor: "#BC8F8F",
+        backgroundColor: "#bfe0c5",
       }}
       key={book.id}
     >

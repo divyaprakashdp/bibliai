@@ -58,6 +58,7 @@ export default function BookOverview() {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
   const [bookData, setBookData] = useState();
+  // const [pageTitle, setPageTitle] = useState();
 
   const { book_Name } = useParams();
 
@@ -71,6 +72,11 @@ export default function BookOverview() {
       });
   }, [book_Name]);
 
+  useEffect(() => {
+    console.log(`Books | ${bookData?.volumeInfo.title}`);
+    document.title = `Books | ${bookData?.volumeInfo.title}`;
+  }, [bookData]);
+
   const handleBuyOptions = () => {
     setOpen(true);
   };
@@ -81,14 +87,15 @@ export default function BookOverview() {
   };
 
   return (
-    <Box mx={"auto"} width={"auto"} height={"100vh"} marginTop="20px">
+    <Box mx={"auto"} marginTop="20px">
       {bookData ? (
-        <Grid container direction="row" spacing={5} sx={{ width: "90%" }}>
-          <Grid item xs={12} sm={4} mt={10}>
+        <Grid container direction="row" spacing={5}>
+          <Grid item xs={12} sm={4} mt={10} ml={10} width="200px">
             <Card
               sx={{
                 textAlign: "center",
-                backgroundColor: "#BC8F8F",
+                backgroundColor: "#bfe0c5",
+                width: "200px",
               }}
               key={bookData.id}
             >

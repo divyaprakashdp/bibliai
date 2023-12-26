@@ -7,24 +7,19 @@ import {
   Avatar,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import logo from "../assets/bookQuest_logo.svg";
-
-// import { createSvgIcon } from "@mui/material";
-// import appIcon from "/bookQuest_logo.svg";
-
-// const icon = createSvgIcon([appIcon], "Plus");
+import appIcon from "../assets/bookQuest_logo.svg";
 
 export default function NavBar() {
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ background: "#333D2E" }}>
       <Toolbar variant="dense">
         <Button href="/">
-          <Avatar src={logo} alt="logo" sx={{ width: 48, height: 48 }} />
+          <Avatar src={appIcon} alt="logo" sx={{ width: 48, height: 48 }} />
         </Button>
 
         <Typography sx={{ flexGrow: 1 }}>
           <Link to="/">
-            <Typography variant="h6" component="div" color={"beige"}>
+            <Typography variant="h4" component="div" color={"#685548"}>
               BOOKQUEST
             </Typography>
           </Link>
