@@ -7,7 +7,6 @@ import {
 } from "@mui/material";
 
 export default function BookCards(props) {
-  console.log(props);
   let booksCard = props.bookData.map((book) => (
     <Card
       sx={{
@@ -18,14 +17,14 @@ export default function BookCards(props) {
       }}
       key={book.id}
     >
-      <CardActionArea href={`/${book.volumeInfo.title}`}>
+      <CardActionArea href={`/${book?.volumeInfo.title}`}>
         <CardMedia
           component="img"
           width={"140px"}
           height="280"
           sx={{ maxWidth: "100%", objectFit: "scale-down" }}
-          src={book.volumeInfo.imageLinks.thumbnail}
-          alt={book.volumeInfo.title}
+          src={book?.volumeInfo.imageLinks.thumbnail}
+          alt={book?.volumeInfo.title}
         />
         <CardContent>
           <Typography
@@ -34,7 +33,7 @@ export default function BookCards(props) {
             component="div"
             color={"#8B4513"}
           >
-            {book.volumeInfo.title}
+            {book?.volumeInfo.title}
           </Typography>
         </CardContent>
       </CardActionArea>

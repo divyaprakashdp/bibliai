@@ -19,7 +19,12 @@ export default function NavBar() {
 
         <Typography sx={{ flexGrow: 1 }}>
           <Link to="/">
-            <Typography variant="h4" component="div" color={"#685548"}>
+            <Typography
+              variant="h3"
+              component="div"
+              color={"#fff"}
+              fontFamily={"Inconsolata"}
+            >
               BOOKQUEST
             </Typography>
           </Link>

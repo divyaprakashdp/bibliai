@@ -19,6 +19,9 @@ const Section = ({ category, values }) => (
           disabled={false}
           size="medium"
           variant="outlined"
+          onClick={() => {
+            console.log("hahahaha!!!");
+          }}
         >
           {buttonLabel}
         </Button>
