@@ -5,6 +5,8 @@ import { styled } from "@mui/material/styles";
 
 const Wrapper = styled(Box)(({ theme }) => ({
   maxWidth: "100%",
+  width: "95em",
+  overflowX: "hidden",
   paddingBottom: "10px",
   //   backgroundImage: `url(
   //     "https://source.unsplash.com/white-and-gray-floral-textile-XFWiZTa2Ub0"
