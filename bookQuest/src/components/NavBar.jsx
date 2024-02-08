@@ -35,7 +35,9 @@ export default function NavBar() {
             RECOMMENDATIONS
           </Button>
           <Button color="inherit"> MY BOOKS</Button>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" href="/signIn">
+            Login
+          </Button>
         </Stack>
       </Toolbar>
     </AppBar>

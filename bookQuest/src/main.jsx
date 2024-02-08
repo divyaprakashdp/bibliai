@@ -7,6 +7,8 @@ import HomePage from "./components/HomePage.jsx";
 import BookOverview from "./components/BookOverview.jsx";
 import Layout from "./components/Layout.jsx";
 import Recommendation from "./components/Recommendation.jsx";
+import { AuthContextProvider } from "./context/AuthContext.jsx";
+import SignIn from "./components/SignIn.jsx";
 
 // const router = createBrowserRouter([
 //   {
@@ -22,13 +24,16 @@ import Recommendation from "./components/Recommendation.jsx";
 // ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/:book_Name" element={<BookOverview />} />
-        <Route path="/recommendation" element={<Recommendation />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>
+  <AuthContextProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/signIn" element={<SignIn />} />
+          <Route path="/:book_Name" element={<BookOverview />} />
+          <Route path="/recommendation" element={<Recommendation />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </AuthContextProvider>
 );
