@@ -1,5 +1,5 @@
 // import BookCards from "./BookCards";
-// import SearchBar from "./SearchBar";
+import SearchBar from "./SearchBar";
 // import { useState } from "react";
 // import { useEffect } from "react";
 
@@ -28,16 +28,17 @@ export default function HomePage() {
   //     });
   // }, []);
   return (
-    <div className="md:h-screen w-full ">
-      <div className="text-center">
-        <h1 className="font-heading font-extralight text-4xl md:text-6xl">
+    <div className="flex flex-col md:h-screen w-full items-center bg-[#EBE9DD]">
+      <div className="text-center py-8">
+        <h1 className="font-heading font-extralight text-4xl md:text-6xl text-[#800000]">
           Welcome
         </h1>
-        <p className="font-heading">
+        <p className="font-heading text-[#800000]">
           Unlock the World of Imagination: Search, Discover, and Buy Books with
           Ease.
         </p>
       </div>
+      <SearchBar />
     </div>
   );
 }
