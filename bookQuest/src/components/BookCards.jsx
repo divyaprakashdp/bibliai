@@ -15,7 +15,7 @@ export default function BookCards(props) {
         height: 360,
         backgroundColor: "#bfe0c5",
       }}
-      key={book.id}
+      key={book?.id}
     >
       <CardActionArea href={`/${book?.volumeInfo.title}`}>
         <CardMedia
@@ -23,8 +23,8 @@ export default function BookCards(props) {
           width={"140px"}
           height="280"
           sx={{ maxWidth: "100%", objectFit: "scale-down" }}
-          src={book?.volumeInfo.imageLinks.thumbnail}
-          alt={book?.volumeInfo.title}
+          src={book?.volumeInfo?.imageLinks?.thumbnail}
+          alt={book?.volumeInfo?.title}
         />
         <CardContent>
           <Typography
@@ -33,7 +33,7 @@ export default function BookCards(props) {
             component="div"
             color={"#8B4513"}
           >
-            {book?.volumeInfo.title}
+            {book?.volumeInfo?.title}
           </Typography>
         </CardContent>
       </CardActionArea>

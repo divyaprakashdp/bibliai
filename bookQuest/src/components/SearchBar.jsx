@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
-export default function SearchBar() {
+export default function SearchBar({ onSubmit }) {
   const [searchInput, setSearchInput] = useState("");
 
   const handleChange = (event) => {
-    setSearchInput(event.target.value);
+    const newQuery = event.target.value;
+    setSearchInput(newQuery);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Make an API call with the search input
-
+    onSubmit(searchInput);
     console.log(searchInput);
   };
 
