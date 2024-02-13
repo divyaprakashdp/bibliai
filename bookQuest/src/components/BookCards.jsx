@@ -1,43 +1,30 @@
-import {
-  Card,
-  CardActionArea,
-  CardMedia,
-  CardContent,
-  Typography,
-} from "@mui/material";
-
 export default function BookCards(props) {
+  const BookCoverWithoutImage = (title) => {
+    return (
+      <div className="relative bg-green-300 w-32 h-64">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <p className="text-white text-lg">{title}</p>
+        </div>
+      </div>
+    );
+  };
+
   let booksCard = props.bookData.map((book) => (
-    <Card
-      sx={{
-        maxWidth: "100%",
-        width: 220,
-        height: 360,
-        backgroundColor: "#bfe0c5",
-      }}
-      key={book?.id}
-    >
-      <CardActionArea href={`/${book?.volumeInfo.title}`}>
-        <CardMedia
-          component="img"
-          width={"140px"}
-          height="280"
-          sx={{ maxWidth: "100%", objectFit: "scale-down" }}
+    <a key={book?.id} href={`/${book?.volumeInfo.title}`} className="block">
+      {book?.volumeInfo?.imageLinks?.thumbnail ? (
+        <img
+          className="w-32 h-64 object-scale-down rounded-r-xl hover:skew-y-6 hover:-translate-x-6 shadow-2xl"
           src={book?.volumeInfo?.imageLinks?.thumbnail}
           alt={book?.volumeInfo?.title}
         />
-        <CardContent>
-          <Typography
-            gutterBottom
-            variant="h6"
-            component="div"
-            color={"#8B4513"}
-          >
-            {book?.volumeInfo?.title}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+      ) : (
+        <div className="relative bg-green-300 w-32 h-52 rounded-r-xl hover:skew-y-6 hover:-translate-x-6">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <p className="text-white text-lg">{book?.volumeInfo?.title}</p>
+          </div>
+        </div>
+      )}
+    </a>
   ));
   return booksCard;
 }

@@ -19,7 +19,7 @@ export default function SearchBar({ onSubmit }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex w-[40%] items-center justify-center gap-4"
+      className="flex w-[40%] items-center justify-center gap-4 pb-8"
     >
       <input
         type="text"
