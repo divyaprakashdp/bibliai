@@ -26,7 +26,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col h-screen pb-8 w-full items-center bg-[#EBE9DD]">
+    <div className="flex flex-col min-h-screen pb-8 w-full items-center bg-[#EBE9DD]">
       <div className="text-center py-8">
         <h1 className="font-heading font-extralight text-4xl md:text-6xl text-[#800000]">
           Welcome
