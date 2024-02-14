@@ -7,17 +7,35 @@ export default function HomePage() {
   const { user } = UserAuth();
   let [query, setQuery] = useState("");
   let [bookData, setBookData] = useState();
+  let [loading, setLoading] = useState(true);
+  let [error, setError] = useState(null);
+
+  // useEffect(() => {
+  //   const savedBookData = sessionStorage.getItem("Book");
+  //   if (savedBookData != null) {
+  //     setBookData(savedBookData);
+  //   }
+  // }, []);
 
   useEffect(() => {
-    if (query !== "") {
-      fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}&orderBy=relevance&token=${user?.accessToken}&maxResults=20`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(`data=> ${data}`);
-          setBookData(data.items);
-        });
+    try {
+      if (query !== "") {
+        fetch(
+          `https://www.googleapis.com/books/v1/volumes?q=${query}&orderBy=relevance&token=${user?.accessToken}&maxResults=20`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(`data=> ${data}`);
+            setBookData(data.items);
+            sessionStorage.setItem("Book", JSON.stringify(data.items));
+            setError(null);
+          });
+      }
+    } catch (error) {
+      console.log(error);
+      setError(true);
+    } finally {
+      setLoading(false);
     }
   }, [query]);
 
@@ -36,8 +54,10 @@ export default function HomePage() {
           Ease.
         </p>
       </div>
-
+      {loading && <div>Loading...</div>}
+      {error && <div>Error...</div>}
       <SearchBar onSubmit={handleSearch} />
+
       <div className="flex flex-wrap w-[80%] justify-center items-center gap-8">
         {bookData && <BookCards bookData={bookData} />}
       </div>

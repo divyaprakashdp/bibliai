@@ -12,7 +12,7 @@ export default function BookCards(props) {
   let booksCard = props.bookData.map((book) => (
     <a
       key={book?.id}
-      href={`/${book?.volumeInfo.title}`}
+      href={`/${book?.id}`}
       className="block group cursor-pointer"
     >
       <div
@@ -27,7 +27,7 @@ export default function BookCards(props) {
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="flex justify-center items-center h-full text-lime-300 text-xl bg-gradient-to-bl from-orange-500 via-purple-500 to-blue-500">
+            <div className="flex justify-center items-center h-full text-lime-300 text-xl text-center bg-gradient-to-bl from-orange-500 via-purple-500 to-blue-500">
               {book?.volumeInfo?.title}
             </div>
           )}
@@ -38,8 +38,6 @@ export default function BookCards(props) {
   ));
   return booksCard;
 }
-
-import React from "react";
 
 // const BookCards =  ({bookData}) => {
 //   return (

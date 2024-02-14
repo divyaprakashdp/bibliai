@@ -60,17 +60,31 @@ export default function BookOverview() {
   const [bookData, setBookData] = useState();
   // const [pageTitle, setPageTitle] = useState();
 
-  const { book_Name } = useParams();
+  const { book_id } = useParams();
+
+  // useEffect(() => {
+  //   fetch(
+  //     `https://www.googleapis.com/books/v1/volumes?q=${book_Name}&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setBookData(data.items[0]);
+  //     });
+  // }, [book_Name]);
 
   useEffect(() => {
-    fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${book_Name}&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setBookData(data.items[0]);
-      });
-  }, [book_Name]);
+    console.log(`getting book for id - ${book_id}`); //bookid comimng as undefined need a fix
+    const savedBookData = sessionStorage.getItem("Book");
+    console.log(
+      "savedData",
+      JSON.parse(savedBookData).find(
+        (item) => item?.id === JSON.stringify(book_id)
+      )
+    );
+    setBookData(
+      JSON.parse(savedBookData).find((item) => item.id === "DRKDDwAAQBAJ")
+    );
+  }, []);
 
   useEffect(() => {
     console.log(`Books | ${bookData?.volumeInfo.title}`);
