@@ -73,7 +73,7 @@ export default function BookOverview() {
   // }, [book_Name]);
 
   useEffect(() => {
-    console.log(`getting book for id - ${book_id}`); //bookid comimng as undefined need a fix
+    console.log(`getting book for id - ${book_id}`); //bookid coming as undefined need a fix
     const savedBookData = sessionStorage.getItem("Book");
     console.log(
       "savedData",
@@ -81,9 +81,7 @@ export default function BookOverview() {
         (item) => item?.id === JSON.stringify(book_id)
       )
     );
-    setBookData(
-      JSON.parse(savedBookData).find((item) => item.id === "DRKDDwAAQBAJ")
-    );
+    setBookData(JSON.parse(savedBookData).find((item) => item.id === book_id));
   }, []);
 
   useEffect(() => {
