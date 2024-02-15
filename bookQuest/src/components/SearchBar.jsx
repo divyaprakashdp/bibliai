@@ -25,7 +25,7 @@ export default function SearchBar({ onSubmit }) {
         type="text"
         name="searchBar"
         value={searchInput}
-        placeholder="Login to search"
+        placeholder="Enter book/author name to search..."
         className="w-[90%] h-10 rounded-3xl bg-opacity-50 bg-[#4169e1] text-[#800000] text-center placeholder-blue-900 hover:bg-opacity-20 hover:placeholder-opacity-0"
         onChange={handleChange}
       />

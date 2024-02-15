@@ -30,10 +30,13 @@ export default function HomePage() {
             sessionStorage.setItem("Book", JSON.stringify(data.items));
             setError(null);
           });
+      } else if (sessionStorage.getItem("Book")) {
+        setBookData(JSON.parse(sessionStorage.getItem("Book")));
       }
     } catch (error) {
       console.log(error);
-      setError(true);
+      setError(error);
+      setBookData(null);
     } finally {
       setLoading(false);
     }

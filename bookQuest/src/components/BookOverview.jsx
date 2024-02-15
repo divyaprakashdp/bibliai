@@ -62,18 +62,8 @@ export default function BookOverview() {
 
   const { book_id } = useParams();
 
-  // useEffect(() => {
-  //   fetch(
-  //     `https://www.googleapis.com/books/v1/volumes?q=${book_Name}&orderBy=relevance&key=AIzaSyD_Hf_1_-268aWv_My3dR-peG6NE9yb2eQ`
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setBookData(data.items[0]);
-  //     });
-  // }, [book_Name]);
-
   useEffect(() => {
-    console.log(`getting book for id - ${book_id}`); //bookid coming as undefined need a fix
+    console.log(`getting book for id - ${book_id}`);
     const savedBookData = sessionStorage.getItem("Book");
     console.log(
       "savedData",
