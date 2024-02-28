@@ -16,7 +16,7 @@ export default function BookCards(props) {
       className="block group cursor-pointer"
     >
       <div
-        className="relative h-52 w-32 rounded-r-lg overflow-hidden group-hover:transform-gpu hover:duration-500 hover:skew-y-12"
+        className="relative h-52 w-32 rounded-r-lg overflow-hidden group-hover:transform-gpu shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7)] hover:scale-110"
         style={{ perspective: "1000px" }}
       >
         <div className="absolute top-0 left-0 w-full h-full transform translate-z-50 rotate-y-0 backface-hidden hover:transform hover:translate-z-50 hover:rotate-y-90 group-hover:translate-z-50 group-hover:rotate-y-90 duration-500 ease-in-out">

@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        logo: ["Merienda"],
+        logo: ["Gelasio"],
         heading: ["Inconsolata"],
       },
     },

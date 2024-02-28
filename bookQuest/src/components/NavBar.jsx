@@ -34,9 +34,9 @@ export default function NavBar() {
   };
 
   return (
-    <header className="bg-[#112009]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 shadow-purple-500 drop-shadow-2xl">
-        <div className="flex items-center justify-between h-16">
+    <header className="bg-gradient-to-bl from-[#112009] via-lime-800 to-[#112009]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div className="flex items-center justify-center h-16">
           <div className="flex-shrink-0">
             <a href="/">
               <img className="h-12 w-12" src={appIcon} alt="logo" />
@@ -45,7 +45,7 @@ export default function NavBar() {
           <div className="flex-1 flex justify-left">
             <a
               href="/"
-              className="flex items-center text-white text-4xl font-inconsolata "
+              className="flex items-center text-white text-4xl font-logo"
             >
               BOOKQUEST
             </a>
