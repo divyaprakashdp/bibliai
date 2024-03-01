@@ -109,7 +109,6 @@ export default function BookOverview() {
           <button>Buy This Book</button>
         </div>
       </div>
-      {/* description */}
 
       {/* details part */}
       <div className="md:w-2/3 mt-12">
@@ -129,7 +128,7 @@ export default function BookOverview() {
         {/* description */}
         <div className="pt-4 pb-4">
           {/* <p className="font-bold">Description: </p> */}
-          <p>{bookData?.volumeInfo?.description}</p>
+          <article>{bookData?.volumeInfo?.description}</article>
         </div>
         {/* Genres */}
         <div className="flex flex-row gap-4 items-center hover:cursor-pointer">
