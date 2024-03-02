@@ -3,10 +3,11 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import BuyOptions from "./BuyOptions";
 import BookCards from "./BookCards";
+import Modal from "./Modal";
 
 import { useEffect } from "react";
 
-const bookPreview = `T
+const bookSummary = `T
 
 1
 
@@ -53,16 +54,9 @@ export default function BookOverview() {
   const { book_id } = useParams();
 
   useEffect(() => {
-    console.log(`getting book for id - ${book_id}`);
     const savedBookData = sessionStorage.getItem("Book");
-    console.log(
-      "savedData",
-      JSON.parse(savedBookData).find(
-        (item) => item?.id === JSON.stringify(book_id)
-      )
-    );
     setBookData(JSON.parse(savedBookData).find((item) => item.id === book_id));
-  }, []);
+  }, [book_id]);
 
   useEffect(() => {
     console.log(`Books | ${bookData?.volumeInfo.title}`);
@@ -79,7 +73,7 @@ export default function BookOverview() {
   };
 
   return (
-    <div className="flex sm:flex-row flex-col sm:items-center sm:text-center md:items-start md:text-left bg-[#EBE9DD] md:min-h-screen text-gray-700">
+    <div className="flex sm:flex-row flex-col min-h-screen sm:items-center sm:text-center md:items-start md:text-left bg-[#EBE9DD] text-gray-700 pb-4">
       {/* bookCover part */}
       <div className="md:w-1/3 flex flex-col gap-8 mt-12 items-center justify-center">
         <div className="relative h-96 w-60 rounded-r-lg overflow-hidden group shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7)]">
@@ -100,10 +94,21 @@ export default function BookOverview() {
           </div>
           <div className="absolute top-0 right-0 w-4 h-full transform translate-z-25 rotate-y-90 backface-hidden hover:transform hover:translate-z-25 hover:rotate-y(0) group-hover:translate-z-25 group-hover:rotate-y(0) duration-500 ease-in-out"></div>
         </div>
-        <div className="grid grid-cols-3 divide-x-2 border-lime-700 border-2 rounded-xl p-2 w-[50%] text-center justify-center">
-          <div>Summary</div>
-          <div>Review</div>
-          <div>Analysis</div>
+        <div className="grid grid-cols-3 divide-x-2 divide-black border-lime-700 border-2 rounded-xl p-2 w-[50%] text-center justify-center">
+          <button
+            className="hover:bg-black/20 p-1"
+            onClick={() => setOpen(true)}
+          >
+            Summary
+          </button>
+          <Modal open={open} onClose={() => setOpen(false)}>
+            <h1 className="text-lg text-slate-900">
+              Summary of the book: {bookData?.volumeInfo.title}
+            </h1>
+            {bookSummary}
+          </Modal>
+          <button className="hover:bg-black/20 p-1">Review</button>
+          <button className="hover:bg-black/20 p-1">Analysis</button>
         </div>
         <div className="flex border-lime-700 border-2 rounded-xl gap-4 p-2 w-[50%] text-center justify-center">
           <button>Buy This Book</button>
@@ -117,7 +122,9 @@ export default function BookOverview() {
           <p className="text-4xl text-inherit font-heading">{`${
             bookData?.volumeInfo?.title
           } ${
-            bookData?.volumeInfo?.subtitle ? bookData?.volumeInfo?.subtitle : ""
+            bookData?.volumeInfo?.subtitle
+              ? `: ${bookData?.volumeInfo?.subtitle}`
+              : ""
           }`}</p>
           <p className="text-xl font-light">
             {bookData?.volumeInfo?.authors?.join(", ")}

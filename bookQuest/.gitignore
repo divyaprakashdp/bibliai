@@ -24,6 +24,7 @@ package-lock.json
 *.njsproj
 *.sln
 *.sw?
+settings.json
 
 # dotenv environment variable files
 .env
