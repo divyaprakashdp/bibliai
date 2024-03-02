@@ -1,0 +1,11 @@
+{
+    "editor.fontSize": 18,
+    "editor.fontFamily": "Terminus",
+    "editor.cursorStyle": "line-thin",
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modifications",
+    "editor.cursorBlinking": "phase",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.fontLigatures": false
+}

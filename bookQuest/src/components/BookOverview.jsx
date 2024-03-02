@@ -4,45 +4,10 @@ import { useState } from "react";
 import BuyOptions from "./BuyOptions";
 import BookCards from "./BookCards";
 import Modal from "./Modal";
+import ReactMarkdown from "react-markdown";
 
 import { useEffect } from "react";
-
-const bookSummary = `T
-
-1
-
-The Surprising Power of Atomic Habits
-HE FATE OF British Cycling changed one day in 2003. The
-organization, which was the governing body for professional
-cycling in Great Britain, had recently hired Dave Brailsford as its new
-performance director. At the time, professional cyclists in Great Britain
-had endured nearly one hundred years of mediocrity. Since 1908,
-British riders had won just a single gold medal at the Olympic Games,
-and they had fared even worse in cycling’s biggest race, the Tour de
-France. In 110 years, no British cyclist had ever won the event.
-In fact, the performance of British riders had been so
-underwhelming that one of the top bike manufacturers in Europe
-refused to sell bikes to the team because they were afraid that it would
-hurt sales if other professionals saw the Brits using their gear.
-Brailsford had been hired to put British Cycling on a new trajectory.
-What made him different from previous coaches was his relentless
-commitment to a strategy that he referred to as “the aggregation of
-marginal gains,” which was the philosophy of searching for a tiny
-margin of improvement in everything you do. Brailsford said, “The
-whole principle came from the idea that if you broke down everything
-you could think of that goes into riding a bike, and then improve it by 1
-percent, you will get a significant increase when you put them all
-together.”
-Brailsford and his coaches began by making small adjustments you
-might expect from a professional cycling team. They redesigned the
-bike seats to make them more comfortable and rubbed alcohol on the
-tires for a better grip. They asked riders to wear electrically heated
-overshorts to maintain ideal muscle temperature while riding and used
-
-biofeedback sensors to monitor how each athlete responded to a
-particular workout. The team tested various fabrics in a wind tunnel
-and had their outdoor riders switch to indoor racing suits, which
-proved to be lighter and more aerodynamic.`;
+import { generateSummary } from "../utils/api_calls/gptCalls";
 
 const bookReview = `It seems there is no review available for this book as of now. Maybe you will be able to add a review once you read the book.`;
 
@@ -50,6 +15,7 @@ export default function BookOverview() {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
   const [bookData, setBookData] = useState();
+  const [bookSummary, setBookSummary] = useState();
 
   const { book_id } = useParams();
 
@@ -62,6 +28,25 @@ export default function BookOverview() {
     console.log(`Books | ${bookData?.volumeInfo.title}`);
     document.title = `Books | ${bookData?.volumeInfo.title}`;
   }, [bookData]);
+
+  useEffect(() => {
+    // console.log(generateSummary());
+    // setBookSummary(generateSummary());
+    (async function () {
+      try {
+        const summaryText = await generateSummary(
+          "summary",
+          bookData?.volumeInfo?.title,
+          bookData?.volumeInfo?.authors?.join(", ")
+        );
+        // const formattedSummaryText = summaryText.
+        console.log(summaryText);
+        setBookSummary(summaryText);
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, []);
 
   const handleBuyOptions = () => {
     setOpen(true);
@@ -94,7 +79,7 @@ export default function BookOverview() {
           </div>
           <div className="absolute top-0 right-0 w-4 h-full transform translate-z-25 rotate-y-90 backface-hidden hover:transform hover:translate-z-25 hover:rotate-y(0) group-hover:translate-z-25 group-hover:rotate-y(0) duration-500 ease-in-out"></div>
         </div>
-        <div className="grid grid-cols-3 divide-x-2 divide-black border-lime-700 border-2 rounded-xl p-2 w-[50%] text-center justify-center">
+        <div className="grid grid-cols-3 divide-x-2 divide-black border-lime-700 border-2 rounded-xl p-2 w-[50%] ">
           <button
             className="hover:bg-black/20 p-1"
             onClick={() => setOpen(true)}
@@ -102,10 +87,11 @@ export default function BookOverview() {
             Summary
           </button>
           <Modal open={open} onClose={() => setOpen(false)}>
-            <h1 className="text-lg text-slate-900">
-              Summary of the book: {bookData?.volumeInfo.title}
-            </h1>
-            {bookSummary}
+            {bookSummary ? (
+              <ReactMarkdown>{bookSummary}</ReactMarkdown>
+            ) : (
+              "loading..."
+            )}
           </Modal>
           <button className="hover:bg-black/20 p-1">Review</button>
           <button className="hover:bg-black/20 p-1">Analysis</button>
@@ -133,7 +119,7 @@ export default function BookOverview() {
         {/* review */}
         <div></div>
         {/* description */}
-        <div className="pt-4 pb-4">
+        <div className="py-4 pr-8 text-justify sm:items-center sm:justify-center">
           {/* <p className="font-bold">Description: </p> */}
           <article>{bookData?.volumeInfo?.description}</article>
         </div>

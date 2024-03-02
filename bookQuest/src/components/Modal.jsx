@@ -8,7 +8,7 @@ export default function Modal({ open, onClose, children }) {
     >
       {/* todo: fix mobile view for modal */}
       <div
-        className="flex flex-col sm:h-[60%] md:h-auto bg-white rounded-xl shadow-2xl sm:w-[70%] md:w-[50%]  p-4 text-justify items-center justify-center transition-all overflow-y-visible"
+        className="flex flex-col sm:h-[60%] md:h-[80%] bg-white rounded-xl shadow-2xl sm:w-[70%] md:w-[50%]  p-4 text-justify items-center justify-center transition-all "
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -18,6 +18,7 @@ export default function Modal({ open, onClose, children }) {
           X
         </button>
         {children}
+
         <button className="bg-lime-200 hover:bg-lime-400 rounded-lg p-4 w-[30%] mt-4">
           copy
         </button>
