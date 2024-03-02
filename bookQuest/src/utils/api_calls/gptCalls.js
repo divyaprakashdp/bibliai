@@ -1,11 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-export const generateSummary = async (promptType, book_title, book_author) => {
-  console.log(`book - ${book_title}, author - ${book_author}`);
-  let promptText = "";
-  if (promptType === "summary") {
-    promptText = `Imagine you're creating a markdown format shortform-style summary for the book "${book_title}" by "${book_author}". Your task is to craft a concise summary of the key ideas, insights, and actionable takeaways from the book, all while adhering to the style and formatting guidelines of Blinkist. Your HTML summary should be visually appealing, engaging, and informative, providing readers with a clear understanding of the author's message and how they can apply it to their lives. Ensure that the summary reflects the essence of the book while maintaining a balance between brevity and depth, capturing the most important aspects without overwhelming the reader with unnecessary detail.`;
-  }
+const generateResultFromPrompt = async (promptText) => {
   // Fetch your API_KEY
   const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
   console.log(API_KEY);
@@ -15,8 +10,21 @@ export const generateSummary = async (promptType, book_title, book_author) => {
 
   const result = await model.generateContent(promptText);
   const response = await result.response;
-  const text = response.text();
-  return text;
+  return response.text();
+};
+
+export const generateSummary = async (promptType, book_title, book_author) => {
+  console.log(`book - ${book_title}, author - ${book_author}`);
+  let promptText = "";
+  if (promptType === "summary") {
+    promptText = `Imagine you're creating a markdown format summary for the book "${book_title}" by "${book_author}". Your task is to craft a concise summary of the key ideas, insights, and actionable takeaways from the book, all while adhering to the style and formatting guidelines of Blinkist. Your HTML summary should be visually appealing, engaging, and informative, providing readers with a clear understanding of the author's message and how they can apply it to their lives. Ensure that the summary reflects the essence of the book while maintaining a balance between brevity and depth, capturing the most important aspects without overwhelming the reader with unnecessary detail.`;
+  } else if (promptType === "review") {
+    promptText = `Summarize the collective sentiment expressed in online reviews for the book "${book_title}" by "${book_author}" and provide a conclusive overview. Additionally, offer a succinct TL;DR outlining reasons to read and reasons not to read the book.`;
+  } else if (promptType === "analysis") {
+    promptText = `As a distinguished scholar and academician, kindly offer a comprehensive analysis of the book "${book_title}" by "${book_author}"`;
+  }
+
+  return await generateResultFromPrompt(promptText);
 };
 
 export const generateSummary2 = (promptType, book_title, book_author) => {
@@ -46,4 +54,10 @@ export const generateSummary2 = (promptType, book_title, book_author) => {
   } catch (error) {
     console.error("Error:", error);
   }
+};
+
+export const generatedRecommendedBooks = async (topic) => {
+  let promptText = `Could you please provide a list of five prominent books on ${topic}? These books should be considered essential readings for anyone interested in gaining a comprehensive understanding of the subject. keep the result in a markdown format`;
+  console.log(topic, "--> ", await generateResultFromPrompt(promptText));
+  return await generateResultFromPrompt(promptText);
 };

@@ -12,10 +12,14 @@ import { generateSummary } from "../utils/api_calls/gptCalls";
 const bookReview = `It seems there is no review available for this book as of now. Maybe you will be able to add a review once you read the book.`;
 
 export default function BookOverview() {
-  const [open, setOpen] = useState(false);
+  const [openSummary, setOpenSummary] = useState(false);
+  const [openReview, setOpenReview] = useState(false);
+  const [openAnalysis, setOpenAnalysis] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
   const [bookData, setBookData] = useState();
   const [bookSummary, setBookSummary] = useState();
+  const [bookReview, setBookReview] = useState();
+  const [bookAnalysis, setBookAnalysis] = useState();
 
   const { book_id } = useParams();
 
@@ -30,8 +34,6 @@ export default function BookOverview() {
   }, [bookData]);
 
   useEffect(() => {
-    // console.log(generateSummary());
-    // setBookSummary(generateSummary());
     (async function () {
       try {
         const summaryText = await generateSummary(
@@ -39,23 +41,25 @@ export default function BookOverview() {
           bookData?.volumeInfo?.title,
           bookData?.volumeInfo?.authors?.join(", ")
         );
-        // const formattedSummaryText = summaryText.
+        const reviewText = await generateSummary(
+          "review",
+          bookData?.volumeInfo?.title,
+          bookData?.volumeInfo?.authors?.join(", ")
+        );
+        const analysisText = await generateSummary(
+          "analysis",
+          bookData?.volumeInfo?.title,
+          bookData?.volumeInfo?.authors?.join(", ")
+        );
         console.log(summaryText);
         setBookSummary(summaryText);
+        setBookReview(reviewText);
+        setBookAnalysis(analysisText);
       } catch (e) {
         console.error(e);
       }
     })();
-  }, []);
-
-  const handleBuyOptions = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (value) => {
-    setOpen(false);
-    setSelectedValue(value);
-  };
+  }, [bookData]);
 
   return (
     <div className="flex sm:flex-row flex-col min-h-screen sm:items-center sm:text-center md:items-start md:text-left bg-[#EBE9DD] text-gray-700 pb-4">
@@ -82,19 +86,43 @@ export default function BookOverview() {
         <div className="grid grid-cols-3 divide-x-2 divide-black border-lime-700 border-2 rounded-xl p-2 w-[50%] ">
           <button
             className="hover:bg-black/20 p-1"
-            onClick={() => setOpen(true)}
+            onClick={() => setOpenSummary(true)}
           >
             Summary
           </button>
-          <Modal open={open} onClose={() => setOpen(false)}>
+          <Modal open={openSummary} onClose={() => setOpenSummary(false)}>
             {bookSummary ? (
               <ReactMarkdown>{bookSummary}</ReactMarkdown>
             ) : (
               "loading..."
             )}
           </Modal>
-          <button className="hover:bg-black/20 p-1">Review</button>
-          <button className="hover:bg-black/20 p-1">Analysis</button>
+          <button
+            className="hover:bg-black/20 p-1"
+            onClick={() => setOpenReview(true)}
+          >
+            Review
+          </button>
+          <Modal open={openReview} onClose={() => setOpenReview(false)}>
+            {bookReview ? (
+              <ReactMarkdown>{bookReview}</ReactMarkdown>
+            ) : (
+              "loading..."
+            )}
+          </Modal>
+          <button
+            className="hover:bg-black/20 p-1"
+            onClick={() => setOpenAnalysis(true)}
+          >
+            Analysis
+          </button>
+          <Modal open={openAnalysis} onClose={() => setOpenAnalysis(false)}>
+            {bookAnalysis ? (
+              <ReactMarkdown>{bookAnalysis}</ReactMarkdown>
+            ) : (
+              "loading..."
+            )}
+          </Modal>
         </div>
         <div className="flex border-lime-700 border-2 rounded-xl gap-4 p-2 w-[50%] text-center justify-center">
           <button>Buy This Book</button>

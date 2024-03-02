@@ -4,8 +4,28 @@ import Tab from "@mui/material/Tab";
 import reccomendationList from "../assets/recommendationList.json";
 import Tabs from "@mui/material/Tabs";
 import PropTypes from "prop-types";
+import Modal from "./Modal";
+import { generatedRecommendedBooks } from "../utils/api_calls/gptCalls";
+import ReactMarkdown from "react-markdown";
 
-const Section = ({ category, values }) => (
+const Section = ({ category, values }) => {
+  const [topic, setTopic] = useState();
+  const [openRecommendationModal, setOpenRecommendationModal] = useState(false);
+  const [recommendeBookList, setRecommendedBookList] = useState();
+
+  // TODO: fix the infinite calls
+
+  // useEffect(() => {
+  //   (async function () {
+  //     try {
+  //       console.log(await generatedRecommendedBooks(topic));
+  //       setRecommendedBookList(await generatedRecommendedBooks(topic));
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   })();
+  // }, [topic]);
+
   <div>
     <Typography variant="h5" color={"#483223"}>
       {category}
@@ -20,16 +40,26 @@ const Section = ({ category, values }) => (
           size="medium"
           variant="outlined"
           onClick={() => {
-            console.log("hahahaha!!!");
+            setTopic(buttonLabel);
           }}
         >
           {buttonLabel}
         </Button>
       ))
     )}
+    <Modal
+      open={openRecommendationModal}
+      onClose={() => setOpenRecommendationModal(false)}
+    >
+      {recommendeBookList ? (
+        <ReactMarkdown>{recommendeBookList}</ReactMarkdown>
+      ) : (
+        "loading..."
+      )}
+    </Modal>
     <br />
-  </div>
-);
+  </div>;
+};
 
 const TabbedView = ({ data }) => {
   const [selectedTab, setSelectedTab] = useState(0);
