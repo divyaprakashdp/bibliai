@@ -13,52 +13,43 @@ const Section = ({ category, values }) => {
   const [openRecommendationModal, setOpenRecommendationModal] = useState(false);
   const [recommendeBookList, setRecommendedBookList] = useState();
 
-  // TODO: fix the infinite calls
+  return (
+    <div>
+      <Typography variant="h5" color={"#483223"}>
+        {category}
+      </Typography>
 
-  // useEffect(() => {
-  //   (async function () {
-  //     try {
-  //       console.log(await generatedRecommendedBooks(topic));
-  //       setRecommendedBookList(await generatedRecommendedBooks(topic));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   })();
-  // }, [topic]);
-
-  <div>
-    <Typography variant="h5" color={"#483223"}>
-      {category}
-    </Typography>
-
-    {values.map((value) =>
-      value.map((buttonLabel, k) => (
-        <Button
-          key={k}
-          sx={{ mr: 2, mt: 1, background: "#bfe0c5", color: "#3a2d28" }}
-          disabled={false}
-          size="medium"
-          variant="outlined"
-          onClick={() => {
-            setTopic(buttonLabel);
-          }}
-        >
-          {buttonLabel}
-        </Button>
-      ))
-    )}
-    <Modal
-      open={openRecommendationModal}
-      onClose={() => setOpenRecommendationModal(false)}
-    >
-      {recommendeBookList ? (
-        <ReactMarkdown>{recommendeBookList}</ReactMarkdown>
-      ) : (
-        "loading..."
+      {values.map((value) =>
+        value.map((buttonLabel, k) => (
+          <Button
+            key={k}
+            sx={{ mr: 2, mt: 1, background: "#bfe0c5", color: "#3a2d28" }}
+            disabled={false}
+            size="medium"
+            variant="outlined"
+            onClick={async () => {
+              setTopic(buttonLabel);
+              setRecommendedBookList(await generatedRecommendedBooks(topic));
+              setOpenRecommendationModal(true);
+            }}
+          >
+            {buttonLabel}
+          </Button>
+        ))
       )}
-    </Modal>
-    <br />
-  </div>;
+      <Modal
+        open={openRecommendationModal}
+        onClose={() => setOpenRecommendationModal(false)}
+      >
+        {recommendeBookList ? (
+          <ReactMarkdown>{recommendeBookList}</ReactMarkdown>
+        ) : (
+          "loading..."
+        )}
+      </Modal>
+      <br />
+    </div>
+  );
 };
 
 const TabbedView = ({ data }) => {

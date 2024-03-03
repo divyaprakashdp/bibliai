@@ -87,6 +87,7 @@ export default function BookOverview() {
           <button
             className="hover:bg-black/20 p-1"
             onClick={() => setOpenSummary(true)}
+            data-te-ripple-init
           >
             Summary
           </button>

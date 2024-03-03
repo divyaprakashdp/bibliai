@@ -3,7 +3,7 @@ export default function Modal({ open, onClose, children }) {
     <div
       onClick={onClose}
       className={`fixed inset-0 flex justify-center items-center transition-colors text-black 
-      ${open ? "visible bg-black/70 " : "invisible"}`}
+      ${open ? "visible bg-black/70 " : "hidden"}`}
     >
       {/* todo: fix mobile view for modal */}
       <div
@@ -19,7 +19,10 @@ export default function Modal({ open, onClose, children }) {
         {children}
 
         <div className="items-center">
-          <button className="bg-lime-200 hover:bg-lime-400 rounded-lg p-4 w-[30%] mt-4">
+          <button
+            data-te-ripple-init
+            className="bg-lime-200 hover:bg-lime-400 rounded-lg p-4 w-[30%] mt-4"
+          >
             copy
           </button>
         </div>

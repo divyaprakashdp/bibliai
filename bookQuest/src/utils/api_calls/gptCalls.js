@@ -57,7 +57,12 @@ export const generateSummary2 = (promptType, book_title, book_author) => {
 };
 
 export const generatedRecommendedBooks = async (topic) => {
-  let promptText = `Could you please provide a list of five prominent books on ${topic}? These books should be considered essential readings for anyone interested in gaining a comprehensive understanding of the subject. keep the result in a markdown format`;
-  console.log(topic, "--> ", await generateResultFromPrompt(promptText));
-  return await generateResultFromPrompt(promptText);
+  if (topic !== undefined || topic !== null) {
+    let promptText = `Could you please provide a list of five prominent books on ${topic}? These books should be considered essential readings for anyone interested in gaining a comprehensive understanding of the subject. keep the result in a markdown format`;
+    console.log(topic, "--> ", await generateResultFromPrompt(promptText));
+    return await generateResultFromPrompt(promptText);
+  } else {
+    return "Facing some issue";
+  }
+  
 };
