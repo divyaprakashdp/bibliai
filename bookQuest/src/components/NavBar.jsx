@@ -3,10 +3,12 @@ import appIcon from "../assets/bookQuest_logo.svg";
 import { UserAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { FaBook, FaBookOpen } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const { user, logout } = UserAuth();
   const [navBtn, setNavBtn] = useState(true);
+  const navigate = useNavigate();
 
   //TODO
   const NavButtonForUSer = () => {
@@ -20,7 +22,14 @@ export default function NavBar() {
   };
   //TODO
   const LoginBtn = () => (
-    <Link className={user ? `hidden` : `px-8 py-2`} to="/signIn">
+    <Link
+      className={
+        user
+          ? `hidden`
+          : `px-2 py-1 bg-blue-500 text-white rounded  hover:bg-blue-600`
+      }
+      to="/signIn"
+    >
       Login
     </Link>
   );
@@ -28,6 +37,7 @@ export default function NavBar() {
   const handleLogout = async () => {
     try {
       await logout();
+      await navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +57,7 @@ export default function NavBar() {
               href="/"
               className="flex items-center text-white text-2xl font-logo"
             >
-              BOOKQUEST
+              BIBLIAI
             </a>
           </div>
           <div className="hidden  md:flex items-center text-xl text-white gap-4">

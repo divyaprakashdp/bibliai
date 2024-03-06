@@ -9,6 +9,7 @@ import Layout from "./components/Layout.jsx";
 import Recommendation from "./components/Recommendation.jsx";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 import SignIn from "./components/SignIn.jsx";
+import LandingPage from "./components/LandingPage.jsx";
 
 // const router = createBrowserRouter([
 //   {
@@ -28,7 +29,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/:book_id" element={<BookOverview />} />
           <Route path="/recommendation" element={<Recommendation />} />

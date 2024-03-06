@@ -37,6 +37,7 @@ const Section = ({ category, values }) => {
           </Button>
         ))
       )}
+      {/* todo fix modal ui issue */}
       <Modal
         open={openRecommendationModal}
         onClose={() => setOpenRecommendationModal(false)}

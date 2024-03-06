@@ -33,7 +33,7 @@ export default function SignIn() {
 
   useEffect(() => {
     if (user != null) {
-      navigate("/"); //todo change it to account page later
+      navigate("/home"); //todo change it to account page later
     }
   }, [user]);
 
