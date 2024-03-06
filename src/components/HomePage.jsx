@@ -1,7 +1,7 @@
 import BookCards from "./BookCards";
 import SearchBar from "./SearchBar";
 import { useState, useEffect } from "react";
-import { UserAuth } from "../context/AuthContext";
+import { UserAuth } from "../../src/context/AuthContext";
 
 export default function HomePage() {
   const { user } = UserAuth();

@@ -2,14 +2,14 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./components/HomePage.jsx";
+import HomePage from "../src/components/HomePage.jsx";
 // import ErrorPage from "./components/ErrorPage.jsx";
-import BookOverview from "./components/BookOverview.jsx";
-import Layout from "./components/Layout.jsx";
-import Recommendation from "./components/Recommendation.jsx";
+import BookOverview from "../src/components/BookOverview.jsx";
+import Layout from "../src/components/Layout.jsx";
+import Recommendation from "../src/components/Recommendation.jsx";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
-import SignIn from "./components/SignIn.jsx";
-import LandingPage from "./components/LandingPage.jsx";
+import SignIn from "../src/components/SignIn.jsx";
+import LandingPage from "../src/components/LandingPage.jsx";
 
 // const router = createBrowserRouter([
 //   {

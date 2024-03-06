@@ -41,7 +41,7 @@ export default function SignIn() {
     <div className="flex flex-col items-center bg-[#EBE9DD] h-screen">
       <div className="flex flex-col w-[40%] h-[50%] mt-10 items-center gap-4 rounded-md  bg-gray-50 border-slate-600">
         <h1 className="items-center text-center text-3xl font-extrabold py-8 font-heading">
-          Sign in to BookQuest
+          Sign in to BIBLIAI
         </h1>
         {signInBtnDetails.map((button) => (
           <div

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Paper, Button, Box, Typography } from "@mui/material";
 import Tab from "@mui/material/Tab";
-import reccomendationList from "../assets/recommendationList.json";
+import reccomendationList from "../../src/assets/recommendationList.json";
 import Tabs from "@mui/material/Tabs";
 import PropTypes from "prop-types";
 import Modal from "./Modal";
@@ -61,7 +61,7 @@ const TabbedView = ({ data }) => {
   };
 
   useEffect(() => {
-    document.title = "BOOKQUEST | RECOMMENDATION";
+    document.title = "BIBLIAI | RECOMMENDATION";
   }, []);
 
   return (

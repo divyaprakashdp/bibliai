@@ -7,51 +7,12 @@ const LandingPage = () => {
     <div
       className={`flex flex-col items-center justify-center min-h-screen bg-gray-100 bg-[url('${booksLanding}')]`}
     >
-      {/* <header className="py-6 w-full bg-white shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Welcome to BookQuest!</h1>
-          <nav>
-            <ul className="flex">
-              <li className="mr-4">
-                <a href="#search" className="text-gray-700 hover:text-gray-900">
-                  Search
-                </a>
-              </li>
-              <li className="mr-4">
-                <a
-                  href="#recommendations"
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  Recommendations
-                </a>
-              </li>
-              <li className="mr-4">
-                <a href="#about" className="text-gray-700 hover:text-gray-900">
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            <FaGoogle className="inline-block mr-2" />
-            Login
-          </button>
-        </div>
-      </header> */}
       <section className={`py-12 text-center `}>
         <h2 className="text-4xl font-bold mb-4">
           Discover a World of Books with Ease
         </h2>
         <p className="text-lg text-gray-700">
-          Welcome to BookQuest, your gateway to a vast universe of literature!
+          Welcome to BIBLIAI, your gateway to a vast universe of literature!
           Whether you're seeking your next page-turner or delving into the
           depths of literary analysis, we've got you covered.
         </p>
@@ -67,7 +28,7 @@ const LandingPage = () => {
         </ul>
         <p className="text-lg text-gray-700 mt-4">
           To embark on your bookish adventure, simply log in using your Google
-          account and unlock the full potential of BookQuest. Your next literary
+          account and unlock the full potential of BIBLIAI. Your next literary
           escapade awaits!
         </p>
         <button className="bg-blue-500 text-white px-6 py-3 rounded mt-8 hover:bg-blue-600">
@@ -76,7 +37,7 @@ const LandingPage = () => {
       </section>
       <footer className="bg-gray-900 text-white py-6 w-full">
         <div className="container mx-auto text-center">
-          <p className="text-lg">&copy; 2024 BookQuest. All rights reserved.</p>
+          <p className="text-lg">&copy; 2024 BIBLIAI. All rights reserved.</p>
           <nav className="mt-4">
             <ul className="flex justify-center">
               <li className="mr-4">
