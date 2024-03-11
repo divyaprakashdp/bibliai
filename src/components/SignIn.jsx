@@ -33,9 +33,9 @@ export default function SignIn() {
 
   useEffect(() => {
     if (user != null) {
-      navigate("/home"); //todo change it to account page later
+      navigate("/home");
     }
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <div className="flex flex-col items-center bg-[#EBE9DD] h-screen">
