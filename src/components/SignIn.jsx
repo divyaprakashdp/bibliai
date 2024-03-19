@@ -3,6 +3,8 @@ import { FcGoogle } from "react-icons/fc";
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { GiTargetDummy } from "react-icons/gi";
+
 //TODO - change the login to use identity services
 export default function SignIn() {
   const signInBtnDetails = [
@@ -12,9 +14,15 @@ export default function SignIn() {
       primaryColor: "bg-blue-500",
       hoverColor: "hover:bg-blue-700",
     },
+    // {
+    //   name: "Github",
+    //   icon: <FaGithubAlt size={30} color="black" />,
+    //   primaryColor: "bg-slate-700",
+    //   hoverColor: "hover:bg-slate-900",
+    // },
     {
-      name: "Github",
-      icon: <FaGithubAlt size={30} color="black" />,
+      name: "DummyAccount",
+      icon: <GiTargetDummy size={30} />,
       primaryColor: "bg-slate-700",
       hoverColor: "hover:bg-slate-900",
     },
@@ -39,7 +47,7 @@ export default function SignIn() {
 
   return (
     <div className="flex flex-col items-center bg-[#EBE9DD] h-screen">
-      <div className="flex flex-col w-[40%] h-[50%] mt-10 items-center gap-4 rounded-md  bg-gray-50 border-slate-600">
+      <div className="flex flex-col w-[80%] h-[50%] md:w-[40%] mt-10 items-center gap-4 rounded-md  bg-gray-50 border-slate-600">
         <h1 className="items-center text-center text-3xl font-extrabold py-8 font-heading">
           Sign in to BIBLIAI
         </h1>

@@ -68,7 +68,7 @@ export default function NavBar() {
           </div>
           {!navBtn && (
             <div
-              className="flex flex-col justify-center items-center absolute top-16 right-0 w-18 rounded-bl-lg bg-gradient-to-b from-[#112009] to-gray-800 text-white"
+              className="flex flex-col justify-center items-center absolute top-12 right-0 w-18 rounded-bl-lg bg-gradient-to-b from-[#112009] to-gray-800 text-white  z-10"
               onClick={() => setNavBtn(!navBtn)}
             >
               {user?.displayName ? <NavButtonForUSer /> : <LoginBtn />}
