@@ -17,7 +17,7 @@ export const generateSummary = async (promptType, book_title, book_author) => {
   console.log(`book - ${book_title}, author - ${book_author}`);
   let promptText = "";
   if (promptType === "summary") {
-    promptText = `Imagine you're creating a markdown format summary for the book "${book_title}" by "${book_author}". Your task is to craft a concise summary of the key ideas, insights, and actionable takeaways from the book, all while adhering to the style and formatting guidelines of Blinkist. Your HTML summary should be visually appealing, engaging, and informative, providing readers with a clear understanding of the author's message and how they can apply it to their lives. Ensure that the summary reflects the essence of the book while maintaining a balance between brevity and depth, capturing the most important aspects without overwhelming the reader with unnecessary detail.`;
+    promptText = `Imagine you're creating a markdown format summary for the book "${book_title}" by "${book_author}". Your task is to craft a concise 2000 words summary of the key ideas, insights, and actionable takeaways from the book, all while adhering to the style and formatting guidelines of Blinkist. Your HTML summary should be visually appealing, engaging, and informative, providing readers with a clear understanding of the author's message and how they can apply it to their lives. Ensure that the summary reflects the essence of the book while maintaining a balance between brevity and depth, capturing the most important aspects without overwhelming the reader with unnecessary detail.`;
   } else if (promptType === "review") {
     promptText = `Summarize the collective sentiment expressed in online reviews for the book "${book_title}" by "${book_author}" and provide a conclusive overview. Additionally, offer a succinct TL;DR outlining reasons to read and reasons not to read the book.`;
   } else if (promptType === "analysis") {
@@ -64,5 +64,4 @@ export const generatedRecommendedBooks = async (topic) => {
   } else {
     return "Facing some issue";
   }
-  
 };

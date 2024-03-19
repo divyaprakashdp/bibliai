@@ -54,7 +54,7 @@ export default function NavBar() {
           </div>
           <div className="flex-1 flex justify-left">
             <a
-              href="/"
+              href={user ? "/home" : "/"}
               className="flex items-center text-white text-2xl font-logo"
             >
               BIBLIAI
