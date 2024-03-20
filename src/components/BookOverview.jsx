@@ -29,11 +29,6 @@ export default function BookOverview() {
   }, [book_id]);
 
   useEffect(() => {
-    console.log(`Books | ${bookData?.volumeInfo.title}`);
-    document.title = `Books | ${bookData?.volumeInfo.title}`;
-  }, [bookData]);
-
-  useEffect(() => {
     (async function () {
       try {
         const summaryText = await generateSummary(
@@ -41,6 +36,7 @@ export default function BookOverview() {
           bookData?.volumeInfo?.title,
           bookData?.volumeInfo?.authors?.join(", ")
         );
+
         const reviewText = await generateSummary(
           "review",
           bookData?.volumeInfo?.title,
@@ -59,6 +55,11 @@ export default function BookOverview() {
         console.error(e);
       }
     })();
+  }, [bookData]);
+
+  useEffect(() => {
+    console.log(`Books | ${bookData?.volumeInfo.title}`);
+    document.title = `Books | ${bookData?.volumeInfo.title}`;
   }, [bookData]);
 
   return (

@@ -1,54 +1,50 @@
 import { useState, useEffect } from "react";
-import { Paper, Button, Box, Typography } from "@mui/material";
-import Tab from "@mui/material/Tab";
-import reccomendationList from "../../src/assets/recommendationList.json";
-import Tabs from "@mui/material/Tabs";
 import PropTypes from "prop-types";
 import Modal from "./Modal";
 import { generatedRecommendedBooks } from "../utils/api_calls/gptCalls";
 import ReactMarkdown from "react-markdown";
+import data from "../../src/assets/recommendationList.json";
 
 const Section = ({ category, values }) => {
-  const [topic, setTopic] = useState();
+  // const [topic, setTopic] = useState();
   const [openRecommendationModal, setOpenRecommendationModal] = useState(false);
-  const [recommendeBookList, setRecommendedBookList] = useState();
+  const [recommendedBookList, setRecommendedBookList] = useState();
+
+  async function handleButtonClick(buttonLabel) {
+    // setTopic(buttonLabel);
+    setOpenRecommendationModal(!openRecommendationModal);
+
+    setRecommendedBookList(await generatedRecommendedBooks(buttonLabel));
+  }
 
   return (
     <div>
-      <Typography variant="h5" color={"#483223"}>
-        {category}
-      </Typography>
+      <h5 className="text-base text-gray-800">{category}</h5>
 
-      {values.map((value) =>
-        value.map((buttonLabel, k) => (
-          <Button
-            key={k}
-            sx={{ mr: 2, mt: 1, background: "#bfe0c5", color: "#3a2d28" }}
-            disabled={false}
-            size="medium"
-            variant="outlined"
-            onClick={async () => {
-              setTopic(buttonLabel);
-              setRecommendedBookList(await generatedRecommendedBooks(topic));
-              setOpenRecommendationModal(true);
-            }}
-          >
-            {buttonLabel}
-          </Button>
-        ))
-      )}
-      {/* todo fix modal ui issue */}
+      {values.map((value, index) => (
+        <div key={index}>
+          {value.map((buttonLabel, k) => (
+            <button
+              key={k}
+              className="mr-2 mt-1 bg-green-200 text-gray-800 border border-green-400 rounded px-3 py-1"
+              onClick={async () => handleButtonClick(buttonLabel)}
+            >
+              {buttonLabel}
+            </button>
+          ))}
+        </div>
+      ))}
+
       <Modal
         open={openRecommendationModal}
-        onClose={() => setOpenRecommendationModal(false)}
+        onClose={() => setOpenRecommendationModal(!openRecommendationModal)}
       >
-        {recommendeBookList ? (
-          <ReactMarkdown>{recommendeBookList}</ReactMarkdown>
+        {recommendedBookList ? (
+          <ReactMarkdown>{recommendedBookList}</ReactMarkdown>
         ) : (
-          "loading..."
+          <p>loading...</p>
         )}
       </Modal>
-      <br />
     </div>
   );
 };
@@ -56,7 +52,7 @@ const Section = ({ category, values }) => {
 const TabbedView = ({ data }) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const handleTabChange = (event, newValue) => {
+  const handleTabChange = (newValue) => {
     setSelectedTab(newValue);
   };
 
@@ -65,28 +61,30 @@ const TabbedView = ({ data }) => {
   }, []);
 
   return (
-    <Box>
-      <Paper>
-        <Tabs
-          value={selectedTab}
-          onChange={handleTabChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-        >
+    <div>
+      <div className="bg-white">
+        <div className="flex">
           {Object.keys(data).map((tabLabel, index) => (
-            <Tab key={index} label={tabLabel} />
+            <button
+              key={index}
+              className={`${
+                selectedTab === index
+                  ? "bg-blue-500 text-white"
+                  : "text-blue-500"
+              } flex-1 py-2 px-4 border-b-2 border-transparent focus:outline-none`}
+              onClick={() => handleTabChange(index)}
+            >
+              {tabLabel}
+            </button>
           ))}
-        </Tabs>
-      </Paper>
+        </div>
+      </div>
 
       {Object.values(data).map((sections, tabIndex) => (
-        <Box
+        <div
           key={tabIndex}
-          sx={{ display: selectedTab === tabIndex ? "block" : "none" }}
-          ml={10}
-          mr={10}
-          mt={2}
+          style={{ display: selectedTab === tabIndex ? "block" : "none" }}
+          className="ml-10 mr-10 mt-2"
         >
           {sections.map((section, index) => (
             <Section
@@ -95,13 +93,13 @@ const TabbedView = ({ data }) => {
               values={Object.values(section)}
             />
           ))}
-        </Box>
+        </div>
       ))}
-    </Box>
+    </div>
   );
 };
 
-const Recommendation = () => <TabbedView data={reccomendationList} />;
+const Recommendation = () => <TabbedView data={data} />;
 
 export default Recommendation;
 
