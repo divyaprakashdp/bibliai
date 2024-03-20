@@ -1,21 +1,14 @@
-import OverviewTab from "./OverviewTab";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import BuyOptions from "./BuyOptions";
-import BookCards from "./BookCards";
 import Modal from "./Modal";
 import ReactMarkdown from "react-markdown";
-
 import { useEffect } from "react";
 import { generateSummary } from "../utils/api_calls/gptCalls";
-
-const bookReview = `It seems there is no review available for this book as of now. Maybe you will be able to add a review once you read the book.`;
 
 export default function BookOverview() {
   const [openSummary, setOpenSummary] = useState(false);
   const [openReview, setOpenReview] = useState(false);
   const [openAnalysis, setOpenAnalysis] = useState(false);
-  const [selectedValue, setSelectedValue] = useState();
   const [bookData, setBookData] = useState();
   const [bookSummary, setBookSummary] = useState();
   const [bookReview, setBookReview] = useState();
@@ -63,7 +56,7 @@ export default function BookOverview() {
   }, [bookData]);
 
   return (
-    <div className="flex sm:flex-row flex-col min-h-screen sm:items-center sm:text-center md:items-start md:text-left bg-[#EBE9DD] text-gray-700 pb-4">
+    <div className="flex sm:flex-row flex-col min-h-screen sm:items-center sm:text-center md:items-start md:text-left bg-[#EBE9DD] bg-gradient-to-br from-blue-300 to-blue-500 text-gray-900 pb-4">
       {/* bookCover part */}
       <div className="md:w-1/3 flex flex-col gap-8 mt-12 items-center justify-center">
         <div className="relative h-96 w-60 rounded-r-lg overflow-hidden group shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7)]">
@@ -84,7 +77,7 @@ export default function BookOverview() {
           </div>
           <div className="absolute top-0 right-0 w-4 h-full transform translate-z-25 rotate-y-90 backface-hidden hover:transform hover:translate-z-25 hover:rotate-y(0) group-hover:translate-z-25 group-hover:rotate-y(0) duration-500 ease-in-out"></div>
         </div>
-        <div className="grid grid-cols-3 divide-x-2 divide-black border-lime-700 border-2 rounded-xl p-2 w-[50%] ">
+        <div className="grid grid-cols-3 divide-x-2 divide-black border-lime-900 border-2 rounded-xl p-2 w-[50%] font-bold">
           <button
             className="hover:bg-black/20 p-1"
             onClick={() => setOpenSummary(true)}
@@ -135,31 +128,31 @@ export default function BookOverview() {
       <div className="md:w-2/3 mt-12">
         {/* heading */}
         <div>
-          <p className="text-4xl text-inherit font-heading">{`${
+          <p className="text-5xl font-bold text-inherit font-heading">{`${
             bookData?.volumeInfo?.title
           } ${
             bookData?.volumeInfo?.subtitle
               ? `: ${bookData?.volumeInfo?.subtitle}`
               : ""
           }`}</p>
-          <p className="text-xl font-light">
+          <p className="text-2xl font-light">
             {bookData?.volumeInfo?.authors?.join(", ")}
           </p>
         </div>
         {/* review */}
         <div></div>
         {/* description */}
-        <div className="py-4 pr-8 text-justify sm:items-center sm:justify-center">
+        <div className="py-4 pr-8 text-justify sm:items-center sm:justify-center font-mono font-semibold text-gray-100">
           {/* <p className="font-bold">Description: </p> */}
           <article>{bookData?.volumeInfo?.description}</article>
         </div>
         {/* Genres */}
         <div className="flex flex-row gap-4 items-center hover:cursor-pointer">
-          <p className=" text-gray-500">Genres:</p>
+          <p className=" text-gray-900">Genres:</p>
           {bookData?.volumeInfo?.categories?.map((category) => (
             <p
               key={category}
-              className="inline p-1 bg-gray-400 rounded-lg hover:bg-gray-500"
+              className="inline p-1 bg-gray-500 rounded-lg hover:bg-gray-600 text-white"
             >
               {category}
             </p>

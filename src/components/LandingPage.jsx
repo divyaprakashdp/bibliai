@@ -13,10 +13,10 @@ import { CiSquareMore } from "react-icons/ci";
 const LandingPage = () => {
   return (
     <div>
-      <div className="flex sm:flex-row flex-col min-h-screen items-center px-8 bg-slate-400">
+      <div className="flex sm:flex-row flex-col min-h-screen items-center px-8 bg-gradient-to-br from-blue-300 via-blue to-blue-600">
         <div className={`flex flex-col px-0`}>
           <section className={`pt-0 text-center `}>
-            <h1 className="text-8xl font-heading mb-4 text-[#372213]">
+            <h1 className="text-9xl font-logo mb-4 bg-clip-text text-transparent bg-gradient-to-br from-gray-500 to-black">
               BIBLIAI
             </h1>
             <h2 className="text-6xl font-bold mb-4">
@@ -38,7 +38,7 @@ const LandingPage = () => {
           />
         </div>
       </div>
-      <div className="flex flex-col min-h-screen text-center px-8 bg-slate-400">
+      <div className="flex flex-col min-h-screen text-center px-8 bg-gradient-to-tr from-blue-300 via-blue to-blue-600">
         <p className="text-2xl font-bold text-gray-900 px-12  ">
           Unlock a multitude of features designed to enhance your reading
           experience:

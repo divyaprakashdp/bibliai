@@ -46,8 +46,8 @@ export default function SignIn() {
   }, [user, navigate]);
 
   return (
-    <div className="flex flex-col items-center bg-[#EBE9DD] h-screen">
-      <div className="flex flex-col w-[80%] h-[50%] md:w-[40%] mt-10 items-center gap-4 rounded-md  bg-gray-50 border-slate-600">
+    <div className="flex flex-col items-center bg-blue-300 h-screen">
+      <div className="flex flex-col w-[80%] h-[50%] md:w-[40%] mt-10 items-center gap-4 rounded-md  bg-blue-50 border-slate-600">
         <h1 className="items-center text-center text-3xl font-extrabold py-8 font-heading">
           Sign in to BIBLIAI
         </h1>

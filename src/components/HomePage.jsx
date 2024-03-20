@@ -40,19 +40,19 @@ export default function HomePage() {
     } finally {
       setLoading(false);
     }
-  }, [query]);
+  }, [query, user]);
 
   const handleSearch = (query) => {
     setQuery(query);
   };
 
   return (
-    <div className="flex flex-col min-h-screen pb-8 w-full items-center bg-[#EBE9DD]">
+    <div className="flex flex-col min-h-screen pb-8 w-full items-center bg-[#EBE9DD] bg-gradient-to-br from-sky-500 to-indigo-500">
       <div className="text-center py-8">
-        <h1 className="font-heading font-extralight text-4xl md:text-6xl text-[#800000]">
+        <h1 className="font-heading text-4xl md:text-8xl text-[#800000]">
           Welcome
         </h1>
-        <p className="font-heading text-[#800000]">
+        <p className="font-heading text-[#e7e2e2] font-bold">
           Unlock the World of Imagination: Search, Discover, and Buy Books with
           Ease.
         </p>

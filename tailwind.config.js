@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        logo: ["Gelasio"],
+        logo: ["Madimi+One"],
         heading: ["Inconsolata"],
       },
     },

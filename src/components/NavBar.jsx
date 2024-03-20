@@ -44,7 +44,7 @@ export default function NavBar() {
   };
 
   return (
-    <header className="h-12 items-center justify-center  bg-gradient-to-b from-[#112009] via-lime-900 to-[#112009]">
+    <header className="h-12 items-center justify-center  bg-gradient-to-b from-slate-500 via-slate-700 to-slate-500">
       <div className="max-w-7xl mx-auto sm:px-6 ">
         <div className="flex items-center justify-center">
           <div className="flex-shrink-0">
