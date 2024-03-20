@@ -16,13 +16,13 @@ const LandingPage = () => {
       <div className="flex sm:flex-row flex-col min-h-screen items-center px-8 bg-gradient-to-br from-blue-300 via-blue to-blue-600">
         <div className={`flex flex-col px-0`}>
           <section className={`pt-0 text-center `}>
-            <h1 className="text-9xl font-logo mb-4 bg-clip-text text-transparent bg-gradient-to-br from-gray-500 to-black">
+            <h1 className="text-6xl md:text-9xl font-logo mb-4 bg-clip-text text-transparent bg-gradient-to-br from-gray-500 to-black">
               BIBLIAI
             </h1>
-            <h2 className="text-6xl font-bold mb-4">
+            <h2 className="text-4xl md:text-6xlfont-bold mb-4">
               Discover a World of Books with Ease
             </h2>
-            <p className="text-2xl text-gray-700">
+            <p className="text-xl md:text-2xl text-gray-700">
               Welcome to BIBLIAI, your gateway to a vast universe of literature!
               Whether you're seeking your next page-turner or delving into the
               depths of literary analysis, we've got you covered.

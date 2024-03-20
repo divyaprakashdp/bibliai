@@ -77,9 +77,9 @@ export default function BookOverview() {
           </div>
           <div className="absolute top-0 right-0 w-4 h-full transform translate-z-25 rotate-y-90 backface-hidden hover:transform hover:translate-z-25 hover:rotate-y(0) group-hover:translate-z-25 group-hover:rotate-y(0) duration-500 ease-in-out"></div>
         </div>
-        <div className="grid grid-cols-3 divide-x-2 divide-black border-lime-900 border-2 rounded-xl p-2 w-[50%] font-bold">
+        <div className="grid grid-cols-3 divide-x-2 divide-black border-lime-900 border-2 rounded-xl p-2 md:w-[50%] font-bold">
           <button
-            className="hover:bg-black/20 p-1"
+            className="hover:bg-black/20 p-3 "
             onClick={() => setOpenSummary(true)}
             data-te-ripple-init
           >
