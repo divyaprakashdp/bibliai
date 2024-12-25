@@ -5,7 +5,7 @@ import { GiMaterialsScience } from "react-icons/gi";
 import { BsRobot } from "react-icons/bs";
 import { BiAnalyse } from "react-icons/bi";
 import { VscOpenPreview } from "react-icons/vsc";
-import AutoPlay from "./Autoplay";
+import AutoPlay from "./Autoplay.jsx";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
