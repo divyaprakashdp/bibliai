@@ -1,10 +1,10 @@
 import BookCards from "./BookCards";
 import SearchBar from "./SearchBar";
 import { useState, useEffect } from "react";
-import { UserAuth } from "../../src/context/AuthContext";
+import { useAuth } from "../../src/context/AuthContext";
 
 export default function HomePage() {
-  const { user } = UserAuth();
+  const { user } = useAuth();
   let [query, setQuery] = useState("");
   let [bookData, setBookData] = useState();
   let [loading, setLoading] = useState(true);
@@ -47,12 +47,12 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen pb-8 w-full items-center bg-[#EBE9DD] bg-gradient-to-br from-sky-500 to-indigo-500">
+    <div className="flex flex-col min-h-screen pb-8 w-full items-center  bg-[#F9C5D1]">
       <div className="text-center py-8">
-        <h1 className="font-heading text-4xl md:text-8xl text-[#800000]">
-          Welcome
+        <h1 className="font-heading text-4xl md:text-8xl text-[#2D325B]">
+          Search a book
         </h1>
-        <p className="font-heading text-[#e7e2e2] font-bold">
+        <p className="font-heading text-[#848edb] font-bold">
           Unlock the World of Imagination: Search, Discover, and Buy Books with
           Ease.
         </p>

@@ -1,39 +1,30 @@
 import { useContext, createContext, useEffect, useState } from "react";
-import {
-  GoogleAuthProvider,
-  signInWithRedirect,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { auth } from "../Firebase";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+const client_id = import.meta.env.VITE_CLIENT_ID;
+
 import PropTypes from "prop-types";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState({});
 
-  const googleSignIn = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider);
+  const [user, setUser] = useState(null);
+
+  const login = (userData) => {
+    setUser(userData);
   };
 
   const logout = () => {
-    signOut(auth);
+    setUser(null);
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      // console.log("user", currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
-
   return (
-    <AuthContext.Provider value={{ googleSignIn, logout, user }}>
-      {children}
-    </AuthContext.Provider>
+    <GoogleOAuthProvider clientId={client_id}  >
+      <AuthContext.Provider value={{ user, login, logout }}>
+        {children}
+      </AuthContext.Provider>
+
+    </GoogleOAuthProvider>
   );
 };
 
@@ -41,6 +32,6 @@ AuthContextProvider.propTypes = {
   children: PropTypes.object.isRequired,
 };
 
-export const UserAuth = () => {
+export const useAuth = () => {
   return useContext(AuthContext);
 };

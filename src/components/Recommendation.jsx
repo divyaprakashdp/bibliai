@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import { generatedRecommendedBooks } from "../utils/api_calls/gptCalls";
 import ReactMarkdown from "react-markdown";
 import data from "../../src/assets/recommendationList.json";
+import Loader from "./Loader";
 
 const Section = ({ category, values }) => {
   // const [topic, setTopic] = useState();
@@ -18,15 +19,15 @@ const Section = ({ category, values }) => {
   }
 
   return (
-    <div>
-      <h5 className="text-base text-gray-800">{category}</h5>
+    <div className="mb-8">
+      <p className="text-xl uppercase text-gray-800">{category}</p>
 
       {values.map((value, index) => (
         <div key={index}>
           {value.map((buttonLabel, k) => (
             <button
               key={k}
-              className="mr-2 mt-1 bg-green-200 text-gray-800 border border-green-400 rounded px-3 py-1"
+              className="mr-2 mt-1 bg-[#264E70] text-white shadow-lg hover:scale-95 shadow-black rounded px-3 py-1"
               onClick={async () => handleButtonClick(buttonLabel)}
             >
               {buttonLabel}
@@ -42,7 +43,7 @@ const Section = ({ category, values }) => {
         {recommendedBookList ? (
           <ReactMarkdown>{recommendedBookList}</ReactMarkdown>
         ) : (
-          <p>loading...</p>
+            <Loader />
         )}
       </Modal>
     </div>
@@ -62,15 +63,15 @@ const TabbedView = ({ data }) => {
 
   return (
     <div>
-      <div className="bg-white">
+      <div className="">
         <div className="flex">
           {Object.keys(data).map((tabLabel, index) => (
             <button
               key={index}
               className={`${
                 selectedTab === index
-                  ? "bg-blue-500 text-white"
-                  : "text-blue-500"
+                ? " bg-[#264E70] text-white underline shadow-lg shadow-black"
+                : "bg-[#68A492] text-[#264E70]"
               } flex-1 py-2 px-4 border-b-2 border-transparent focus:outline-none`}
               onClick={() => handleTabChange(index)}
             >
@@ -84,7 +85,7 @@ const TabbedView = ({ data }) => {
         <div
           key={tabIndex}
           style={{ display: selectedTab === tabIndex ? "block" : "none" }}
-          className="ml-10 mr-10 mt-2"
+          className="h-screen bg-[#F9C5D1] px-6 py-4"
         >
           {sections.map((section, index) => (
             <Section

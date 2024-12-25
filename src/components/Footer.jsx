@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-6 w-full">
@@ -16,9 +18,9 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="#privacy" className="text-white hover:text-gray-300">
+              <Link to={"/terms"} className="text-white hover:text-gray-300">
                 Privacy Policy
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
