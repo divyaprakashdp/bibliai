@@ -67,12 +67,12 @@ export default function NavBar() {
                 {menu.name}
               </Link>
             ) : (
-              <button
+                <span
                 onClick={menu.func}
                 className="relative group-hover:text-white"
               >
                 {menu.name}
-              </button>
+                </span>
             )}
           </button>
         ))}
