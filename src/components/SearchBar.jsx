@@ -13,7 +13,6 @@ export default function SearchBar({ onSubmit }) {
     e.preventDefault();
 
     onSubmit(searchInput);
-    console.log(searchInput);
   };
 
   return (

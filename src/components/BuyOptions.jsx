@@ -8,8 +8,9 @@ export default function BuyOptions(props) {
     onClose(selectedValue);
   };
 
-  const flipkartLink = `https://www.flipkart.com/search?q=${bookName}`;
-  const amazonLink = `https://www.amazon.in/s?k=${bookName}`;
+  const encodedBookName = encodeURIComponent(bookName);
+  const flipkartLink = `https://www.flipkart.com/search?q=${encodedBookName}`;
+  const amazonLink = `https://www.amazon.in/s?k=${encodedBookName}`;
   return (
     <Dialog onClose={handleClose} open={open} sx={{ padding: 5 }}>
       <DialogTitle>Buy Options</DialogTitle>

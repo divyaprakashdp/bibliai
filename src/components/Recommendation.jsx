@@ -41,7 +41,21 @@ const Section = ({ category, values }) => {
         onClose={() => setOpenRecommendationModal(!openRecommendationModal)}
       >
         {recommendedBookList ? (
-          <ReactMarkdown>{recommendedBookList}</ReactMarkdown>
+          <ReactMarkdown
+            skipHtml={true}
+            urlTransform={(uri) => {
+              if (!uri) return "";
+              const sanitized = uri.trim().toLowerCase();
+              return sanitized.startsWith("javascript:") ? "#" : uri;
+            }}
+            components={{
+              a: ({ node, ...props }) => (
+                <a target="_blank" rel="noopener noreferrer" {...props} />
+              ),
+            }}
+          >
+            {recommendedBookList}
+          </ReactMarkdown>
         ) : (
             <Loader />
         )}

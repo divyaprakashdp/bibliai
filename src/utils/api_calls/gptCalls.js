@@ -1,18 +1,28 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const generateResultFromPrompt = async (promptText) => {
-  // Fetch your API_KEY
   const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-  // Access your API key (see "Set up your API key" above)
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
-  const result = await model.generateContent(promptText);
-  const response = result.response;
-  console.log("Gemini Response - ", response);
-  if (response.text().length > 1) {
-    return response.text();
+  if (!API_KEY) {
+    return null;
   }
+
+  try {
+    const genAI = new GoogleGenerativeAI(API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+    const result = await model.generateContent(promptText);
+    const response = result.response;
+    if (response.text().length > 1) {
+      return response.text();
+    }
+  } catch (err) {
+    if (import.meta.env.DEV) {
+      console.error("Gemini request failed:", err);
+    }
+    return null;
+  }
+
+  return null;
 };
 
 const markdownRules = `Create a professional and well-structured Markdown document with the following features:
@@ -29,8 +39,6 @@ Horizontal Rules: Use horizontal rules (---) to separate sections when necessary
 Notes or Warnings: Highlight important notes or warnings using custom formatting like >.`
 
 export const generateSummary = async (promptType, book_title, book_author) => {
-  console.log(`book - ${book_title}, author - ${book_author}`);
-
   let promptText = "";
   if (book_title !== undefined) {
     if (promptType === "summary") {
@@ -49,7 +57,6 @@ export const generateSummary = async (promptType, book_title, book_author) => {
 
 export const generatedRecommendedBooks = async (topic) => {
   let promptText = `Could you please provide a list of five prominent books on ${topic}? These books should be considered essential readings for anyone interested in gaining a comprehensive understanding of the subject. keep the result in a markdown format with heading as - ## Top five books on ${topic}. ${markdownRules}`;
-  console.log(topic, "--> ", promptText);
   return await generateResultFromPrompt(promptText);
 };
 

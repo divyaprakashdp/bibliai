@@ -33,57 +33,56 @@ export default function BookOverview() {
   useEffect(() => {
     if (bookData?.volumeInfo?.title) {
       const title = bookData.volumeInfo.title;
-      getAvgTimeToRead(title).then((time) => setAvgTimeToRead(time));
-      getMoviesNames(title).then((names) => setMovieNames(names));
+      getAvgTimeToRead(title)
+        .then((time) => setAvgTimeToRead(time || "NA"))
+        .catch(() => setAvgTimeToRead("NA"));
+      getMoviesNames(title)
+        .then((names) => setMovieNames(names || ""))
+        .catch(() => setMovieNames(""));
     }
   }, [bookData]);
 
 
   useEffect(() => {
-    console.log(`Books | ${bookData?.volumeInfo.title}`);
     const title = bookData?.volumeInfo?.title;
     document.title = `Books | ${title}`;
-
   }, [bookData]);
 
   const handleSummary = async () => {
-    setLoading(true)
+    setLoading(true);
     setOpenSummary(true);
     const summaryText = await generateSummary(
       "summary",
       bookData?.volumeInfo?.title,
       bookData?.volumeInfo?.authors?.join(", ")
     );
-    console.log("Summary", summaryText);
-    setBookSummary(summaryText);
-    setLoading(false)
-  }
+    setBookSummary(summaryText || "GPT summary is unavailable at the moment.");
+    setLoading(false);
+  };
 
   const handleReview = async () => {
-    setLoading(true)
+    setLoading(true);
     setOpenReview(true);
     const summaryText = await generateSummary(
       "review",
       bookData?.volumeInfo?.title,
       bookData?.volumeInfo?.authors?.join(", ")
     );
-    console.log("Summary for modal \n", summaryText);
-    setBookReview(summaryText);
-    setLoading(false)
-  }
+    setBookReview(summaryText || "GPT review is unavailable at the moment.");
+    setLoading(false);
+  };
 
   const handleAnalysis = async () => {
-    setLoading(true)
+    setLoading(true);
     setOpenAnalysis(true);
     const summaryText = await generateSummary(
       "analysis",
       bookData?.volumeInfo?.title,
       bookData?.volumeInfo?.authors?.join(", ")
     );
-    console.log(summaryText);
-    setBookAnalysis(summaryText);
-    setLoading(false)
-  }
+    setBookAnalysis(summaryText || "GPT analysis is unavailable at the moment.");
+    setLoading(false);
+  };
 
   return (
     <div className="flex sm:flex-row flex-col min-h-screen sm:items-center sm:text-center md:items-start md:text-left bg-[#F9C5D1] text-gray-900 pb-4">
@@ -118,7 +117,23 @@ export default function BookOverview() {
             {loading ? (
               <Loader />
             ) : (
-                <Markdown remarkPlugins={[remarkGfm]} className="markdown markdown-body" >{bookSummary}</Markdown>
+                <Markdown
+                  remarkPlugins={[remarkGfm]}
+                  skipHtml={true}
+                  className="markdown markdown-body"
+                  urlTransform={(uri) => {
+                    if (!uri) return "";
+                    const sanitized = uri.trim().toLowerCase();
+                    return sanitized.startsWith("javascript:") ? "#" : uri;
+                  }}
+                  components={{
+                    a: ({ node, ...props }) => (
+                      <a target="_blank" rel="noopener noreferrer" {...props} />
+                    ),
+                  }}
+                >
+                  {bookSummary}
+                </Markdown>
             )}
           </Modal>
           <button
@@ -131,7 +146,23 @@ export default function BookOverview() {
             {loading ? (
               <Loader />
             ) : (
-                <Markdown remarkPlugins={[remarkGfm]} className="markdown markdown-body" >{bookReview}</Markdown>
+                <Markdown
+                  remarkPlugins={[remarkGfm]}
+                  skipHtml={true}
+                  className="markdown markdown-body"
+                  urlTransform={(uri) => {
+                    if (!uri) return "";
+                    const sanitized = uri.trim().toLowerCase();
+                    return sanitized.startsWith("javascript:") ? "#" : uri;
+                  }}
+                  components={{
+                    a: ({ node, ...props }) => (
+                      <a target="_blank" rel="noopener noreferrer" {...props} />
+                    ),
+                  }}
+                >
+                  {bookReview}
+                </Markdown>
             )}
           </Modal>
           <button
@@ -144,7 +175,23 @@ export default function BookOverview() {
             {loading ? (
               <Loader />
             ) : (
-                <Markdown remarkPlugins={[remarkGfm]} className="markdown markdown-body" >{bookAnalysis}</Markdown>
+                <Markdown
+                  remarkPlugins={[remarkGfm]}
+                  skipHtml={true}
+                  className="markdown markdown-body"
+                  urlTransform={(uri) => {
+                    if (!uri) return "";
+                    const sanitized = uri.trim().toLowerCase();
+                    return sanitized.startsWith("javascript:") ? "#" : uri;
+                  }}
+                  components={{
+                    a: ({ node, ...props }) => (
+                      <a target="_blank" rel="noopener noreferrer" {...props} />
+                    ),
+                  }}
+                >
+                  {bookAnalysis}
+                </Markdown>
             )}
           </Modal>
         </div>

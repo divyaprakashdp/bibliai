@@ -1,10 +1,10 @@
 import BookCards from "./BookCards";
 import SearchBar from "./SearchBar";
 import { useState, useEffect } from "react";
-import { useAuth } from "../../src/context/AuthContext";
+
+const GOOGLE_BOOKS_API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY;
 
 export default function HomePage() {
-  const { user } = useAuth();
   let [query, setQuery] = useState("");
   let [bookData, setBookData] = useState();
   let [loading, setLoading] = useState(true);
@@ -18,29 +18,49 @@ export default function HomePage() {
   // }, []);
 
   useEffect(() => {
-    try {
+    const fetchBooks = async () => {
       if (query !== "") {
-        fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=${query}&orderBy=relevance&token=${user?.accessToken}&maxResults=20`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(`data=> ${data}`);
-            setBookData(data.items);
-            sessionStorage.setItem("Book", JSON.stringify(data.items));
-            setError(null);
-          });
-      } else if (sessionStorage.getItem("Book")) {
-        setBookData(JSON.parse(sessionStorage.getItem("Book")));
+        setLoading(true);
+        const encodedQuery = encodeURIComponent(query);
+        const url = `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&orderBy=relevance&maxResults=20${GOOGLE_BOOKS_API_KEY ? `&key=${GOOGLE_BOOKS_API_KEY}` : ""}`;
+
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            const body = await response.text();
+            const message = body ? body : response.statusText;
+            throw new Error(`Book API error ${response.status}: ${message}`);
+          }
+
+          const contentType = response.headers.get("content-type") || "";
+          let data;
+          if (contentType.includes("application/json")) {
+            data = await response.json();
+          } else {
+            const text = await response.text();
+            throw new Error(`Unexpected API response: ${text}`);
+          }
+
+          setBookData(data.items || []);
+          sessionStorage.setItem("Book", JSON.stringify(data.items || []));
+          setError(null);
+        } catch (error) {
+          setError(error);
+          setBookData(null);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        const savedBooks = sessionStorage.getItem("Book");
+        if (savedBooks) {
+          setBookData(JSON.parse(savedBooks));
+        }
+        setLoading(false);
       }
-    } catch (error) {
-      console.log(error);
-      setError(error);
-      setBookData(null);
-    } finally {
-      setLoading(false);
-    }
-  }, [query, user]);
+    };
+
+    fetchBooks();
+  }, [query]);
 
   const handleSearch = (query) => {
     setQuery(query);
@@ -58,7 +78,11 @@ export default function HomePage() {
         </p>
       </div>
       {loading && <div>Loading...</div>}
-      {error && <div>Error...</div>}
+      {error && (
+        <div className="text-red-600">
+          Something went wrong while searching. Please try again later.
+        </div>
+      )}
       <SearchBar onSubmit={handleSearch} />
 
       <div className="flex flex-wrap w-[80%] justify-center items-center gap-8">
